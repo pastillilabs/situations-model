@@ -1,0 +1,3 @@
+module com.pastillilabs.situations.model
+plugin situationsmodelplugin
+classname Plugin
