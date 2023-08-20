@@ -74,6 +74,7 @@ signals:
     // Methods
     void reqAdd();
     void reqRemove(const QString& uid);
+    void reqSetNegative(bool negative);
 
 private:
     QString mName;
