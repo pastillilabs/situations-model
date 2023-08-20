@@ -85,6 +85,7 @@ signals:
     void reqSetManual(bool manual);
     void reqSetTimingStart(const QDateTime& timingStart);
     void reqSetTimingDuration(const QTime& timingDuration);
+    void reqSetActive(bool active);
 
 private:
     ActionGroupList* mActionGroups{nullptr};
