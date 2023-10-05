@@ -14,7 +14,6 @@ class MODEL_SHARED_EXPORT Settings : public QObject {
     Q_OBJECT
     Q_PROPERTY(bool enabled READ isEnabled WRITE setEnabled NOTIFY enabledChanged)
     Q_PROPERTY(bool notifications READ isNotifications WRITE setNotifications NOTIFY notificationsChanged)
-    Q_PROPERTY(bool systemBackground READ isSystemBackground WRITE setSystemBackground NOTIFY systemBackgroundChanged)
     Q_PROPERTY(int theme READ theme WRITE setTheme NOTIFY themeChanged)
 
 public:
@@ -30,28 +29,22 @@ public:
     bool isNotifications() const;
     void setNotifications(bool notifications);
 
-    bool isSystemBackground() const;
-    void setSystemBackground(bool systemBackground);
-
     int theme() const;
     void setTheme(int theme);
 
 signals:
     void enabledChanged(bool enabled);
     void notificationsChanged(bool notifications);
-    void systemBackgroundChanged(bool systemBackground);
     void themeChanged(int theme);
 
     // Methods
     void reqSetEnabled(bool enabled);
     void reqSetNotifications(bool notifications);
-    void reqSetSystemBackground(bool systemBackground);
     void reqSetTheme(int theme);
 
 private:
     bool mEnabled{false};
     bool mNotifications{false};
-    bool mSystemBackground{false};
     int mTheme{0};
 };
 
