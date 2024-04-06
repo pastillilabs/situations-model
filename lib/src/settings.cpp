@@ -12,7 +12,6 @@ QJsonObject Settings::toJson(bool persistent) const {
         return {
             {QLatin1String("enabled"), mEnabled},
             {QLatin1String("notifications"), mNotifications},
-            {QLatin1String("systemBackground"), mSystemBackground},
             {QLatin1String("theme"), mTheme}
         };
     }
@@ -25,12 +24,10 @@ void Settings::fromJson(const QJsonObject& jsonObject, bool persistent) {
     if(persistent) {
         const QJsonValue enabled = jsonObject.value(QLatin1String("enabled"));
         const QJsonValue notifications = jsonObject.value(QLatin1String("notifications"));
-        const QJsonValue systemBackground = jsonObject.value(QLatin1String("systemBackground"));
         const QJsonValue theme = jsonObject.value(QLatin1String("theme"));
 
         if(!enabled.isUndefined()) setEnabled(enabled.toBool());
         if(!notifications.isUndefined()) setNotifications(notifications.toBool());
-        if(!systemBackground.isUndefined()) setSystemBackground(systemBackground.toBool());
         if(!theme.isUndefined()) setTheme(theme.toInt());
     }
 }
@@ -54,17 +51,6 @@ void Settings::setNotifications(bool notifications) {
     if(notifications != mNotifications) {
         mNotifications = notifications;
         emit notificationsChanged(notifications);
-    }
-}
-
-bool Settings::isSystemBackground() const {
-    return mSystemBackground;
-}
-
-void Settings::setSystemBackground(bool systemBackground) {
-    if(systemBackground != mSystemBackground) {
-        mSystemBackground = systemBackground;
-        emit systemBackgroundChanged(systemBackground);
     }
 }
 
