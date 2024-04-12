@@ -42,6 +42,14 @@ void ActionProperties::setCallBlocker(bool callBlocker) {
     mCallBlocker = callBlocker;
 }
 
+bool ActionProperties::isEnabler() const {
+    return mEnabler;
+}
+
+void ActionProperties::setEnabler(bool enabler) {
+    mEnabler = enabler;
+}
+
 bool ActionProperties::isSequenceable() const {
     return mSequenceable;
 }
