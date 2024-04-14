@@ -16,10 +16,7 @@ SOURCES += $$files($$PWD/*.cpp)
 
 DISTFILES = qmldir
 
-android: include(android/android.pri)
-sailfish: include(sailfish/sailfish.pri)
-win32: include(win/win.pri)
-linux_desktop: include(linux/linux.pri)
+include(platform/platform.pri)
 
 # Copy qmldir to output directory
 copy_qmldir.files = qmldir

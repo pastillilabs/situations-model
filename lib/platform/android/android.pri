@@ -1,5 +1,5 @@
-INCLUDEPATH += $$PWD/../src
-DEPENDPATH += $$PWD/../src
+INCLUDEPATH += $$PWD/../../src
+DEPENDPATH += $$PWD/../../src
 
 DEFINES += PLUGIN_FILE_TEMPLATE='\\"libsituations2%1_$${QT_ARCH}.so\\"'
 

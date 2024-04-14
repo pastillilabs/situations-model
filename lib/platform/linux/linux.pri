@@ -1,5 +1,5 @@
-INCLUDEPATH += $$PWD/../src
-DEPENDPATH += $$PWD/../src
+INCLUDEPATH += $$PWD/../../src
+DEPENDPATH += $$PWD/../../src
 
 SOURCES += \
     $$files($$PWD/*.cpp, true)
