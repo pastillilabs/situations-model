@@ -1,4 +1,4 @@
-#include "model/actiongrouplist.h"
+#include "situations-model/actiongrouplist.h"
 
 #include <xylitol/util.h>
 

@@ -1,4 +1,4 @@
-#include "model/contactlist.h"
+#include "situations-model/contactlist.h"
 
 #include <QJsonObject>
 

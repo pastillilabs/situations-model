@@ -1,0 +1,6 @@
+file(GLOB PLATFORM_SOURCES CONFIGURE_DEPENDS *.cpp *.h)
+
+target_sources(${PROJECT_NAME}
+    PRIVATE
+        ${PLATFORM_SOURCES}
+)

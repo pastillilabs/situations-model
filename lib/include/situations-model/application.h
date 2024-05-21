@@ -1,15 +1,18 @@
 #pragma once
 
-#include <model/model_global.h>
-#include <model/contactlist.h>
-#include <model/featurelist.h>
-#include <model/packagelist.h>
-#include <model/platform.h>
-#include <model/settings.h>
-#include <model/situationlist.h>
+#include <situations-model/model_global.h>
+#include <situations-model/contactlist.h>
+#include <situations-model/featurelist.h>
+#include <situations-model/packagelist.h>
+#include <situations-model/platform.h>
+#include <situations-model/settings.h>
+#include <situations-model/situationlist.h>
 
 #include <QJsonObject>
 #include <QObject>
+#if(QT_VERSION >= QT_VERSION_CHECK(6, 0, 0))
+#include <QtQml/qqmlregistration.h>
+#endif
 
 namespace Model {
 
@@ -18,6 +21,10 @@ namespace Model {
  */
 class MODEL_SHARED_EXPORT Application : public QObject {
     Q_OBJECT
+#if(QT_VERSION >= QT_VERSION_CHECK(6, 0, 0))
+    QML_ELEMENT
+    QML_SINGLETON
+#endif
     Q_PROPERTY(FeatureList* features READ features CONSTANT)
     Q_PROPERTY(Platform* platform READ platform CONSTANT)
     Q_PROPERTY(Settings* settings READ settings CONSTANT)

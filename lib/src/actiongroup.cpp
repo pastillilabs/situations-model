@@ -1,4 +1,4 @@
-#include "model/actiongroup.h"
+#include "situations-model/actiongroup.h"
 
 #include <QJsonArray>
 

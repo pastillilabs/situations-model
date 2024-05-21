@@ -1,4 +1,4 @@
-#include "model/packagelist.h"
+#include "situations-model/packagelist.h"
 
 #include <QJsonObject>
 

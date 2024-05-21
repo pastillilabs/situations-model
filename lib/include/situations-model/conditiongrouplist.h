@@ -1,7 +1,7 @@
 #pragma once
 
-#include <model/model_global.h>
-#include <model/actiongroup.h>
+#include <situations-model/model_global.h>
+#include <situations-model/conditiongroup.h>
 #include <xylitol/listmodel.h>
 
 #include <QByteArray>
@@ -10,14 +10,20 @@
 #include <QObject>
 #include <QString>
 #include <QVariant>
+#if(QT_VERSION >= QT_VERSION_CHECK(6, 0, 0))
+#include <QtQml/qqmlregistration.h>
+#endif
 
 namespace Model {
 
 /**
- * @brief The ActionGroupList class
+ * @brief The ConditionGroupList class
  */
-class MODEL_SHARED_EXPORT ActionGroupList : public Xylitol::ListModel {
+class MODEL_SHARED_EXPORT ConditionGroupList : public Xylitol::ListModel {
     Q_OBJECT
+#if(QT_VERSION >= QT_VERSION_CHECK(6, 0, 0))
+    QML_ELEMENT
+#endif
 
 public:
     enum Role {
@@ -26,8 +32,8 @@ public:
     Q_ENUM(Role)
 
 public:
-    explicit ActionGroupList(QObject* parent = nullptr);
-    virtual ~ActionGroupList() = default;
+    explicit ConditionGroupList(QObject* parent = nullptr);
+    virtual ~ConditionGroupList() = default;
 
     QJsonObject toJson(bool persistent) const;
     void fromJson(const QJsonObject& jsonObject, bool persistent);
@@ -36,7 +42,7 @@ public:
     void remove(const QString& name);
     int indexOfName(const QString& name) const;
 
-    Q_INVOKABLE Model::ActionGroup* findByName(const QString& name) const;
+    Q_INVOKABLE Model::ConditionGroup* findByName(const QString& name) const;
 
 public: // From Xylitol::ListModel
     QHash<int, QByteArray> roleNames() const override;

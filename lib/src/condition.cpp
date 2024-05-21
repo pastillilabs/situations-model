@@ -1,4 +1,4 @@
-#include "model/condition.h"
+#include "situations-model/condition.h"
 
 namespace Model {
 

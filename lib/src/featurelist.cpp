@@ -1,5 +1,5 @@
-#include "model/featurelist.h"
-#include "model/feature.h"
+#include "situations-model/featurelist.h"
+#include "situations-model/feature.h"
 
 namespace Model {
 

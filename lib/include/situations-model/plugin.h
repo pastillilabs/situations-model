@@ -1,16 +1,19 @@
 #pragma once
 
-#include <model/model_global.h>
-#include <model/action.h>
-#include <model/actionproperties.h>
-#include <model/condition.h>
-#include <model/conditionproperties.h>
+#include <situations-model/model_global.h>
+#include <situations-model/action.h>
+#include <situations-model/actionproperties.h>
+#include <situations-model/condition.h>
+#include <situations-model/conditionproperties.h>
 
 #include <QJsonArray>
 #include <QJsonObject>
 #include <QObject>
 #include <QString>
 #include <QUrl>
+#if(QT_VERSION >= QT_VERSION_CHECK(6, 0, 0))
+#include <QtQml/qqmlregistration.h>
+#endif
 
 namespace Model {
 
@@ -19,6 +22,9 @@ namespace Model {
  */
 class MODEL_SHARED_EXPORT Plugin : public QObject {
     Q_OBJECT
+#if(QT_VERSION >= QT_VERSION_CHECK(6, 0, 0))
+    QML_ELEMENT
+#endif
     Q_PROPERTY(QString name READ name CONSTANT)
     Q_PROPERTY(QObject* model READ model CONSTANT)
     Q_PROPERTY(bool actionRunning READ isActionRunning WRITE setActionRunning NOTIFY actionRunningChanged)

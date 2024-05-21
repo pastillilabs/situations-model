@@ -1,4 +1,4 @@
-#include "model/situation.h"
+#include "situations-model/situation.h"
 
 namespace Model {
 

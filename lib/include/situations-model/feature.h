@@ -1,8 +1,8 @@
 #pragma once
 
-#include <model/model_global.h>
-#include <model/plugin.h>
-#include <model/versionlimits.h>
+#include <situations-model/model_global.h>
+#include <situations-model/plugin.h>
+#include <situations-model/versionlimits.h>
 
 #include <QDateTime>
 #include <QJsonObject>
@@ -12,6 +12,9 @@
 #include <QPluginLoader>
 #include <QString>
 #include <QStringList>
+#if(QT_VERSION >= QT_VERSION_CHECK(6, 0, 0))
+#include <QtQml/qqmlregistration.h>
+#endif
 
 namespace Model {
 
@@ -20,6 +23,9 @@ namespace Model {
  */
 class MODEL_SHARED_EXPORT Feature : public QObject {
     Q_OBJECT
+#if(QT_VERSION >= QT_VERSION_CHECK(6, 0, 0))
+    QML_ELEMENT
+#endif
     Q_PROPERTY(QString name READ name WRITE setName NOTIFY nameChanged)
     Q_PROPERTY(TypeFlags typeFlags READ typeFlags WRITE setTypeFlags NOTIFY typeFlagsChanged)
     Q_PROPERTY(Model::VersionLimits actionLimits READ actionLimits WRITE setActionLimits NOTIFY actionLimitsChanged)

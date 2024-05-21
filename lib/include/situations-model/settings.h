@@ -1,9 +1,12 @@
 #pragma once
 
-#include <model/model_global.h>
+#include <situations-model/model_global.h>
 
 #include <QJsonObject>
 #include <QObject>
+#if(QT_VERSION >= QT_VERSION_CHECK(6, 0, 0))
+#include <QtQml/qqmlregistration.h>
+#endif
 
 namespace Model {
 
@@ -12,9 +15,13 @@ namespace Model {
  */
 class MODEL_SHARED_EXPORT Settings : public QObject {
     Q_OBJECT
+#if(QT_VERSION >= QT_VERSION_CHECK(6, 0, 0))
+    QML_ELEMENT
+#endif
     Q_PROPERTY(bool enabled READ isEnabled WRITE setEnabled NOTIFY enabledChanged)
     Q_PROPERTY(bool notifications READ isNotifications WRITE setNotifications NOTIFY notificationsChanged)
     Q_PROPERTY(int theme READ theme WRITE setTheme NOTIFY themeChanged)
+    Q_PROPERTY(QString locale READ locale WRITE setLocale NOTIFY localeChanged)
 
 public:
     explicit Settings(QObject* parent = nullptr);
@@ -32,20 +39,26 @@ public:
     int theme() const;
     void setTheme(int theme);
 
+    const QString& locale() const;
+    void setLocale(const QString& locale);
+
 signals:
     void enabledChanged(bool enabled);
     void notificationsChanged(bool notifications);
     void themeChanged(int theme);
+    void localeChanged(const QString& locale);
 
     // Methods
     void reqSetEnabled(bool enabled);
     void reqSetNotifications(bool notifications);
     void reqSetTheme(int theme);
+    void reqSetLocale(const QString& locale);
 
 private:
     bool mEnabled{false};
     bool mNotifications{false};
     int mTheme{0};
+    QString mLocale;
 };
 
 } // namespace Model
