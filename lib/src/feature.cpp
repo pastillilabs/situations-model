@@ -1,4 +1,4 @@
-#include "model/feature.h"
+#include "situations-model/feature.h"
 #include "logging.h"
 #include "util.h"
 
@@ -20,7 +20,7 @@ Feature::Feature(QObject* parent)
         if(!name().isEmpty() && typeFlags().testFlag(TypeFlagPlugin)) {
             pluginLoader = new QPluginLoader(Util::pluginPath(name()), this);
             if(!pluginLoader->load()) {
-                qCWarning(model) << "Failed to load plugin" << pluginLoader->fileName();
+                qCWarning(model) << "Failed to load plugin" << name();
                 qCWarning(model) << "Error:" << pluginLoader->errorString();
 
                 delete pluginLoader;

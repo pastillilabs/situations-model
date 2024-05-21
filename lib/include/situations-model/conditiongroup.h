@@ -1,7 +1,7 @@
 #pragma once
 
-#include <model/condition.h>
-#include <model/model_global.h>
+#include <situations-model/condition.h>
+#include <situations-model/model_global.h>
 #include <xylitol/listmodel.h>
 
 #include <QByteArray>
@@ -9,6 +9,9 @@
 #include <QJsonObject>
 #include <QObject>
 #include <QString>
+#if(QT_VERSION >= QT_VERSION_CHECK(6, 0, 0))
+#include <QtQml/qqmlregistration.h>
+#endif
 
 #include <functional>
 
@@ -19,6 +22,9 @@ namespace Model {
  */
 class MODEL_SHARED_EXPORT ConditionGroup : public Xylitol::ListModel {
     Q_OBJECT
+#if(QT_VERSION >= QT_VERSION_CHECK(6, 0, 0))
+    QML_ELEMENT
+#endif
     Q_PROPERTY(QString name READ name WRITE setName NOTIFY nameChanged)
     Q_PROPERTY(int priority READ priority WRITE setPriority NOTIFY priorityChanged)
     Q_PROPERTY(bool active READ isActive WRITE setActive NOTIFY activeChanged)

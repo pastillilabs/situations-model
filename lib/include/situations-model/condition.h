@@ -1,24 +1,30 @@
 #pragma once
 
-#include <model/model_global.h>
+#include <situations-model/model_global.h>
 
 #include <QJsonObject>
 #include <QObject>
 #include <QString>
+#if(QT_VERSION >= QT_VERSION_CHECK(6, 0, 0))
+#include <QtQml/qqmlregistration.h>
+#endif
 
 namespace Model {
 
 /**
- * @brief The Action class
+ * @brief The Condition class
  */
-class MODEL_SHARED_EXPORT Action : public QObject {
+class MODEL_SHARED_EXPORT Condition : public QObject {
     Q_OBJECT
+#if(QT_VERSION >= QT_VERSION_CHECK(6, 0, 0))
+    QML_ELEMENT
+#endif
     Q_PROPERTY(QString uid READ uid WRITE setUid NOTIFY uidChanged)
     Q_PROPERTY(QJsonObject payload READ payload WRITE setPayload NOTIFY payloadChanged)
     Q_PROPERTY(int delay READ delay WRITE setDelay NOTIFY delayChanged)
     Q_PROPERTY(ReadyState readyState READ readyState WRITE setReadyState NOTIFY readyStateChanged)
-    Q_PROPERTY(RunningState runningState READ runningState WRITE setRunningState NOTIFY runningStateChanged)
-    Q_PROPERTY(ActiveState activeState READ activeState WRITE setActiveState NOTIFY activeStateChanged)
+    Q_PROPERTY(bool running READ isRunning WRITE setRunning NOTIFY runningChanged)
+    Q_PROPERTY(bool active READ isActive WRITE setActive NOTIFY activeChanged)
 
 public:
     enum class ReadyState {
@@ -28,21 +34,12 @@ public:
     };
     Q_ENUM(ReadyState)
 
-    enum class RunningState {
-        RunningStateStarting,
-        RunningStateStarted,
-        RunningStateStopping,
-        RunningStateStopped
+    enum class Comparison {
+        ComparisonLessThan,
+        ComparisonMoreThan,
+        ComparisonEquals
     };
-    Q_ENUM(RunningState)
-
-    enum class ActiveState {
-        ActiveStateActivating,
-        ActiveStateActive,
-        ActiveStateInactivating,
-        ActiveStateInactive
-    };
-    Q_ENUM(ActiveState)
+    Q_ENUM(Comparison)
 
     enum class OptionalState {
         OptionalStateFalse,
@@ -52,8 +49,8 @@ public:
     Q_ENUM(OptionalState)
 
 public:
-    Q_INVOKABLE explicit Action(QObject* parent = nullptr);
-    virtual ~Action() = default;
+    Q_INVOKABLE explicit Condition(QObject* parent = nullptr);
+    virtual ~Condition() = default;
 
     QJsonObject toJson(bool persistent) const;
     void fromJson(const QJsonObject& jsonObject, bool persistent);
@@ -70,19 +67,19 @@ public:
     ReadyState readyState() const;
     void setReadyState(ReadyState readyState);
 
-    RunningState runningState() const;
-    void setRunningState(RunningState runningState);
+    bool isRunning() const;
+    void setRunning(bool running);
 
-    ActiveState activeState() const;
-    void setActiveState(ActiveState activeState);
+    bool isActive() const;
+    void setActive(bool active);
 
 signals:
     void uidChanged(const QString& uid);
     void payloadChanged(const QJsonObject& payload);
     void delayChanged(int delay);
-    void readyStateChanged(Action::ReadyState readyState);
-    void runningStateChanged(Action::RunningState runningState);
-    void activeStateChanged(Action::ActiveState activeState);
+    void readyStateChanged(Condition::ReadyState readyState);
+    void runningChanged(bool running);
+    void activeChanged(bool active);
 
     // Methods
     void reqCommit(const QJsonObject& payload);
@@ -93,8 +90,8 @@ private:
     QJsonObject mPayload;
     int mDelay{0};
     ReadyState mReadyState{ReadyState::ReadyStateReady};
-    RunningState mRunningState{RunningState::RunningStateStopped};
-    ActiveState mActiveState{ActiveState::ActiveStateInactive};
+    bool mRunning{false};
+    bool mActive{false};
 };
 
 } // namespace Model

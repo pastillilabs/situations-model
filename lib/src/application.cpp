@@ -1,4 +1,4 @@
-#include "model/application.h"
+#include "situations-model/application.h"
 
 #include <xylitol/templates.h>
 

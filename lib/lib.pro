@@ -7,7 +7,7 @@ DEFINES += MODEL_LIBRARY
 INCLUDEPATH += $$PWD/include ../../xylitol/lib/include
 DEPENDPATH += $$PWD/include ../../xylitol/lib/include
 
-HEADERS += $$files($$PWD/include/model/*.h, true)
+HEADERS += $$files($$PWD/include/*.h, true)
 HEADERS += $$files($$PWD/src/*.h, true)
 SOURCES += $$files($$PWD/src/*.cpp, true)
 

@@ -1,8 +1,12 @@
 #pragma once
 
-#include <model/model_global.h>
-#include <model/contactlist.h>
-#include <model/packagelist.h>
+#include <situations-model/model_global.h>
+#include <situations-model/contactlist.h>
+#include <situations-model/packagelist.h>
+
+#if(QT_VERSION >= QT_VERSION_CHECK(6, 0, 0))
+#include <QtQml/qqmlregistration.h>
+#endif
 
 namespace Model {
 
@@ -11,6 +15,9 @@ namespace Model {
  */
 class MODEL_SHARED_EXPORT Platform : public QObject {
     Q_OBJECT
+#if(QT_VERSION >= QT_VERSION_CHECK(6, 0, 0))
+    QML_ELEMENT
+#endif
     Q_PROPERTY(ContactList* contacts READ contacts CONSTANT)
     Q_PROPERTY(PackageList* packages READ packages CONSTANT)
     Q_PROPERTY(bool rooted READ isRooted WRITE setRooted NOTIFY rootedChanged)

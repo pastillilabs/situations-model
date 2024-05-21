@@ -1,4 +1,4 @@
-#include "model/actionproperties.h"
+#include "situations-model/actionproperties.h"
 
 #include <xylitol/util.h>
 

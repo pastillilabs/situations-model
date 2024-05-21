@@ -1,4 +1,4 @@
-#include "model/conditiongroup.h"
+#include "situations-model/conditiongroup.h"
 
 #include <QJsonArray>
 
