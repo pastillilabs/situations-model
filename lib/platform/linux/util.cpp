@@ -10,7 +10,7 @@ QString pluginPath(const QString& id) {
     QDir pluginDir(QCoreApplication::applicationDirPath());
     pluginDir.cd(QStringLiteral("../plugins/%1").arg(id));
 
-    return pluginDir.absoluteFilePath(QStringLiteral("libsituations2%1.so").arg(id));
+    return pluginDir.absoluteFilePath(QStringLiteral("libsituations%1.so").arg(id));
 }
 
 } // namespace Util
