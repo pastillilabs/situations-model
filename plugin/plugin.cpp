@@ -1,24 +1,24 @@
 #include "plugin.h"
 
-#include <model/action.h>
-#include <model/actiongroup.h>
-#include <model/actiongrouplist.h>
-#include <model/actionproperties.h>
-#include <model/application.h>
-#include <model/condition.h>
-#include <model/conditiongroup.h>
-#include <model/conditiongrouplist.h>
-#include <model/conditionproperties.h>
-#include <model/contactlist.h>
-#include <model/feature.h>
-#include <model/featurelist.h>
-#include <model/packagelist.h>
-#include <model/platform.h>
-#include <model/plugin.h>
-#include <model/settings.h>
-#include <model/situation.h>
-#include <model/situationlist.h>
-#include <model/versionlimits.h>
+#include <situations-model/action.h>
+#include <situations-model/actiongroup.h>
+#include <situations-model/actiongrouplist.h>
+#include <situations-model/actionproperties.h>
+#include <situations-model/application.h>
+#include <situations-model/condition.h>
+#include <situations-model/conditiongroup.h>
+#include <situations-model/conditiongrouplist.h>
+#include <situations-model/conditionproperties.h>
+#include <situations-model/contactlist.h>
+#include <situations-model/feature.h>
+#include <situations-model/featurelist.h>
+#include <situations-model/packagelist.h>
+#include <situations-model/platform.h>
+#include <situations-model/plugin.h>
+#include <situations-model/settings.h>
+#include <situations-model/situation.h>
+#include <situations-model/situationlist.h>
+#include <situations-model/versionlimits.h>
 
 #include <qqml.h>
 
@@ -34,7 +34,7 @@ void Plugin::registerTypes(const char* uri) {
     qmlRegisterType<Model::ActionGroup>(uri, 1, 0, "ActionGroupModel");
     qmlRegisterType<Model::ActionGroupList>(uri, 1, 0, "ActionGroupListModel");
     qmlRegisterType<Model::Condition>(uri, 1, 0, "ConditionModel");
-    qmlRegisterType<Model::ConditionGroup>(uri, 1, 0, "ConditionGroup");
+    qmlRegisterType<Model::ConditionGroup>(uri, 1, 0, "ConditionGroupModel");
     qmlRegisterType<Model::ConditionGroupList>(uri, 1, 0, "ConditionGroupListModel");
     qmlRegisterType<Model::ContactList>(uri, 1, 0, "ContactListModel");
     qmlRegisterType<Model::FeatureList>(uri, 1, 0, "FeatureListModel");
