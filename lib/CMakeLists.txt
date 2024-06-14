@@ -15,7 +15,7 @@ qt_standard_project_setup()
 
 qt_add_library(${PROJECT_NAME})
 
-file(GLOB SOURCES CONFIGURE_DEPENDS *.cpp *.h include/${APP_NAME}-${TARGET_NAME}/*.h)
+file(GLOB SOURCES CONFIGURE_DEPENDS src/*.cpp src/*.h include/${APP_NAME}-${TARGET_NAME}/*.h)
 qt_add_qml_module(${PROJECT_NAME}
     URI
         ${DOMAIN_NAME}.${COMPANY_NAME}.${APP_NAME}.${TARGET_NAME}
