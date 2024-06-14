@@ -27,7 +27,7 @@ class MODEL_SHARED_EXPORT Feature : public QObject {
     QML_ELEMENT
 #endif
     Q_PROPERTY(QString name READ name WRITE setName NOTIFY nameChanged)
-    Q_PROPERTY(TypeFlags typeFlags READ typeFlags WRITE setTypeFlags NOTIFY typeFlagsChanged)
+    Q_PROPERTY(int typeFlags READ typeFlags WRITE setTypeFlags NOTIFY typeFlagsChanged)
     Q_PROPERTY(Model::VersionLimits actionLimits READ actionLimits WRITE setActionLimits NOTIFY actionLimitsChanged)
     Q_PROPERTY(Model::VersionLimits conditionLimits READ conditionLimits WRITE setConditionLimits NOTIFY conditionLimitsChanged)
     Q_PROPERTY(QStringList packages READ packages WRITE setPackages NOTIFY packagesChanged)
@@ -72,8 +72,8 @@ public:
     const QString& name() const;
     void setName(const QString& name);
 
-    const TypeFlags& typeFlags() const;
-    void setTypeFlags(const TypeFlags& typeFlags);
+    int typeFlags() const;
+    void setTypeFlags(int typeFlags);
 
     const VersionLimits& actionLimits() const;
     void setActionLimits(const VersionLimits& actionLimits);
@@ -121,7 +121,7 @@ public:
 
 signals:
     void nameChanged(const QString& name);
-    void typeFlagsChanged(const Model::Feature::TypeFlags& typeFlags);
+    void typeFlagsChanged(int typeFlags);
     void actionLimitsChanged(const Model::VersionLimits& actionLimits);
     void conditionLimitsChanged(const Model::VersionLimits& conditionLimits);
     void packagesChanged(const QStringList& packages);
@@ -142,7 +142,7 @@ signals:
 
 private:
     QString mName;
-    TypeFlags mTypeFlags{TypeFlag::TypeFlagNone};
+    int mTypeFlags{TypeFlag::TypeFlagNone};
     VersionLimits mActionLimits;
     VersionLimits mConditionLimits;
     QStringList mPackages;

@@ -17,7 +17,7 @@ Feature::Feature(QObject* parent)
         mPluginLoader = nullptr;
 
         QPluginLoader* pluginLoader{nullptr};
-        if(!name().isEmpty() && typeFlags().testFlag(TypeFlagPlugin)) {
+        if(!name().isEmpty() && TypeFlags::fromInt(typeFlags()).testFlag(TypeFlagPlugin)) {
             pluginLoader = new QPluginLoader(Util::pluginPath(name()), this);
             if(!pluginLoader->load()) {
                 qCWarning(model) << "Failed to load plugin" << name();
@@ -102,11 +102,11 @@ void Feature::setName(const QString& name) {
     }
 }
 
-const Feature::TypeFlags& Feature::typeFlags() const {
+int Feature::typeFlags() const {
     return mTypeFlags;
 }
 
-void Feature::setTypeFlags(const TypeFlags& typeFlags) {
+void Feature::setTypeFlags(int typeFlags) {
     if(typeFlags != mTypeFlags) {
         mTypeFlags = typeFlags;
         emit typeFlagsChanged(typeFlags);

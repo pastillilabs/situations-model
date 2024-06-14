@@ -130,7 +130,7 @@ int FeatureList::indexOfName(const QString& name) const {
 int FeatureList::indexOfBase(const QString& base) const {
     for(int i = 0; i < mContainer.count(); ++i) {
         const Feature* feature = mContainer.at(i).value(FeatureList::RoleFeature).value<Feature*>();
-        if(feature->base() == base && feature->typeFlags().testFlag(Model::Feature::TypeFlagExtension)) {
+        if(feature->base() == base && Feature::TypeFlags::fromInt(feature->typeFlags()).testFlag(Model::Feature::TypeFlagExtension)) {
             return i;
         }
     }
