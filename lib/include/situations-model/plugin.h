@@ -74,8 +74,6 @@ public:
     bool isController() const;
     void setController(bool controller);
 
-    virtual void qmlRegisterTypes() const;
-
     virtual QJsonObject toJson(bool persistent) const;
     virtual void fromJson(const QJsonObject& jsonObject, bool persistent);
 
