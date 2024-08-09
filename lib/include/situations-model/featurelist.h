@@ -11,9 +11,7 @@
 #include <QObject>
 #include <QString>
 #include <QStringList>
-#if(QT_VERSION >= QT_VERSION_CHECK(6, 0, 0))
 #include <QtQml/qqmlregistration.h>
-#endif
 
 namespace Model {
 
@@ -22,9 +20,7 @@ namespace Model {
  */
 class MODEL_SHARED_EXPORT FeatureList : public Xylitol::ListModel {
     Q_OBJECT
-#if(QT_VERSION >= QT_VERSION_CHECK(6, 0, 0))
     QML_ELEMENT
-#endif
     Q_PROPERTY(int versionBuild READ versionBuild WRITE setVersionBuild NOTIFY versionBuildChanged)
     Q_PROPERTY(bool updating READ isUpdating WRITE setUpdating NOTIFY updatingChanged)
     Q_PROPERTY(bool updatingFailed READ isUpdatingFailed WRITE setUpdatingFailed NOTIFY updatingFailedChanged)

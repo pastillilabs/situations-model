@@ -5,9 +5,7 @@
 #include <QJsonObject>
 #include <QObject>
 #include <QString>
-#if(QT_VERSION >= QT_VERSION_CHECK(6, 0, 0))
 #include <QtQml/qqmlregistration.h>
-#endif
 
 namespace Model {
 
@@ -16,9 +14,7 @@ namespace Model {
  */
 class MODEL_SHARED_EXPORT Condition : public QObject {
     Q_OBJECT
-#if(QT_VERSION >= QT_VERSION_CHECK(6, 0, 0))
     QML_ELEMENT
-#endif
     Q_PROPERTY(QString uid READ uid WRITE setUid NOTIFY uidChanged)
     Q_PROPERTY(QJsonObject payload READ payload WRITE setPayload NOTIFY payloadChanged)
     Q_PROPERTY(int delay READ delay WRITE setDelay NOTIFY delayChanged)

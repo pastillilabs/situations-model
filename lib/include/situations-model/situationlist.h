@@ -10,9 +10,7 @@
 #include <QObject>
 #include <QString>
 #include <QVariant>
-#if(QT_VERSION >= QT_VERSION_CHECK(6, 0, 0))
 #include <QtQml/qqmlregistration.h>
-#endif
 
 #include <functional>
 
@@ -23,9 +21,7 @@ namespace Model {
  */
 class MODEL_SHARED_EXPORT SituationList : public Xylitol::ListModel {
     Q_OBJECT
-#if(QT_VERSION >= QT_VERSION_CHECK(6, 0, 0))
     QML_ELEMENT
-#endif
     Q_PROPERTY(int count READ count NOTIFY countChanged STORED false)
 
 public:

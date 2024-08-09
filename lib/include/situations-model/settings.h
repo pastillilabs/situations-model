@@ -4,9 +4,7 @@
 
 #include <QJsonObject>
 #include <QObject>
-#if(QT_VERSION >= QT_VERSION_CHECK(6, 0, 0))
 #include <QtQml/qqmlregistration.h>
-#endif
 
 namespace Model {
 
@@ -15,9 +13,7 @@ namespace Model {
  */
 class MODEL_SHARED_EXPORT Settings : public QObject {
     Q_OBJECT
-#if(QT_VERSION >= QT_VERSION_CHECK(6, 0, 0))
     QML_ELEMENT
-#endif
     Q_PROPERTY(bool enabled READ isEnabled WRITE setEnabled NOTIFY enabledChanged)
     Q_PROPERTY(bool notifications READ isNotifications WRITE setNotifications NOTIFY notificationsChanged)
     Q_PROPERTY(int theme READ theme WRITE setTheme NOTIFY themeChanged)

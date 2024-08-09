@@ -5,9 +5,7 @@
 #include <QObject>
 #include <QString>
 #include <QStringList>
-#if(QT_VERSION >= QT_VERSION_CHECK(6, 0, 0))
 #include <QtQml/qqmlregistration.h>
-#endif
 
 namespace Model {
 
@@ -16,9 +14,7 @@ namespace Model {
  */
 class MODEL_SHARED_EXPORT ActionProperties {
     Q_GADGET
-#if(QT_VERSION >= QT_VERSION_CHECK(6, 0, 0))
     QML_VALUE_TYPE(actionProperties)
-#endif
     Q_PROPERTY(QStringList permissions READ permissions WRITE setPermissions)
     Q_PROPERTY(QStringList extraPermissions READ extraPermissions WRITE setExtraPermissions)
     Q_PROPERTY(bool callBlocker READ isCallBlocker WRITE setCallBlocker)

@@ -9,9 +9,7 @@
 #include <QObject>
 #include <QString>
 #include <QTime>
-#if(QT_VERSION >= QT_VERSION_CHECK(6, 0, 0))
 #include <QtQml/qqmlregistration.h>
-#endif
 
 namespace Model {
 
@@ -20,9 +18,7 @@ namespace Model {
  */
 class MODEL_SHARED_EXPORT Situation : public QObject {
     Q_OBJECT
-#if(QT_VERSION >= QT_VERSION_CHECK(6, 0, 0))
     QML_ELEMENT
-#endif
     Q_PROPERTY(ActionGroupList* actionGroups READ actionGroups CONSTANT)
     Q_PROPERTY(ConditionGroupList* conditionGroups READ conditionGroups CONSTANT)
 

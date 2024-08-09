@@ -3,9 +3,7 @@
 #include <situations-model/model_global.h>
 
 #include <QObject>
-#if(QT_VERSION >= QT_VERSION_CHECK(6, 0, 0))
 #include <QtQml/qqmlregistration.h>
-#endif
 
 namespace Model {
 
@@ -14,9 +12,7 @@ namespace Model {
  */
 class MODEL_SHARED_EXPORT VersionLimits {
     Q_GADGET
-#if(QT_VERSION >= QT_VERSION_CHECK(6, 0, 0))
     QML_VALUE_TYPE(versionLimits)
-#endif
     Q_PROPERTY(int min READ min WRITE setMin)
     Q_PROPERTY(int max READ max WRITE setMax)
     Q_PROPERTY(int rootMin READ rootMin WRITE setRootMin)

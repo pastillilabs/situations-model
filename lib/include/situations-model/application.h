@@ -10,9 +10,7 @@
 
 #include <QJsonObject>
 #include <QObject>
-#if(QT_VERSION >= QT_VERSION_CHECK(6, 0, 0))
 #include <QtQml/qqmlregistration.h>
-#endif
 
 namespace Model {
 
@@ -21,10 +19,8 @@ namespace Model {
  */
 class MODEL_SHARED_EXPORT Application : public QObject {
     Q_OBJECT
-#if(QT_VERSION >= QT_VERSION_CHECK(6, 0, 0))
     QML_ELEMENT
     QML_SINGLETON
-#endif
     Q_PROPERTY(FeatureList* features READ features CONSTANT)
     Q_PROPERTY(Platform* platform READ platform CONSTANT)
     Q_PROPERTY(Settings* settings READ settings CONSTANT)

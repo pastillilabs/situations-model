@@ -12,9 +12,7 @@
 #include <QPluginLoader>
 #include <QString>
 #include <QStringList>
-#if(QT_VERSION >= QT_VERSION_CHECK(6, 0, 0))
 #include <QtQml/qqmlregistration.h>
-#endif
 
 namespace Model {
 
@@ -23,9 +21,7 @@ namespace Model {
  */
 class MODEL_SHARED_EXPORT Feature : public QObject {
     Q_OBJECT
-#if(QT_VERSION >= QT_VERSION_CHECK(6, 0, 0))
     QML_ELEMENT
-#endif
     Q_PROPERTY(QString name READ name WRITE setName NOTIFY nameChanged)
     Q_PROPERTY(int typeFlags READ typeFlags WRITE setTypeFlags NOTIFY typeFlagsChanged)
     Q_PROPERTY(Model::VersionLimits actionLimits READ actionLimits WRITE setActionLimits NOTIFY actionLimitsChanged)
