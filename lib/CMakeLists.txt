@@ -13,9 +13,8 @@ endif()
 
 qt_standard_project_setup()
 
-qt_add_library(${PROJECT_NAME})
-
 file(GLOB SOURCES CONFIGURE_DEPENDS src/*.cpp src/*.h include/${APP_NAME}-${TARGET_NAME}/*.h)
+file(GLOB SOURCES_PLATFORM CONFIGURE_DEPENDS src/${SYSTEM_NAME}/*.cpp src/${SYSTEM_NAME}/*.h)
 qt_add_qml_module(${PROJECT_NAME}
     URI
         ${DOMAIN_NAME}.${COMPANY_NAME}.${APP_NAME}.${TARGET_NAME}
@@ -25,6 +24,7 @@ qt_add_qml_module(${PROJECT_NAME}
         ${DOMAIN_NAME}/${COMPANY_NAME}/${APP_NAME}/${TARGET_NAME}
     SOURCES
         ${SOURCES}
+        ${SOURCES_PLATFORM}
 )
 
 target_link_libraries(${PROJECT_NAME}
@@ -46,5 +46,3 @@ target_compile_definitions(${PROJECT_NAME}
     PRIVATE
         MODEL_LIBRARY
 )
-
-add_subdirectory(platform)
