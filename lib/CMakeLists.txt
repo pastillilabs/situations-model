@@ -7,10 +7,6 @@ project(${APP_NAME}${TARGET_NAME} LANGUAGES CXX)
 
 find_package(Qt6 6.5 REQUIRED COMPONENTS Core Quick)
 
-if(QT_KNOWN_POLICY_QTP0001)
-    qt_policy(SET QTP0001 NEW)
-endif()
-
 qt_standard_project_setup()
 
 file(GLOB SOURCES CONFIGURE_DEPENDS src/*.cpp src/*.h include/${APP_NAME}-${TARGET_NAME}/*.h)

@@ -9,7 +9,7 @@ namespace Util {
 QString pluginPath(const QString& id) {
     const QDir pluginDir(QCoreApplication::applicationDirPath());
 
-    return pluginDir.absoluteFilePath(QStringLiteral(PLUGIN_FILE_TEMPLATE).arg(id));
+    return pluginDir.absoluteFilePath(QStringLiteral("libsituations%1.so").arg(id));
 }
 
 } // namespace Util
