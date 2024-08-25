@@ -15,14 +15,14 @@ PackageList* Platform::packages() const {
     return mPackages;
 }
 
-bool Platform::isRooted() const {
-    return mRooted;
+const QString& Platform::suPath() const {
+    return mSuPath;
 }
 
-void Platform::setRooted(bool rooted) {
-    if(rooted != mRooted) {
-        mRooted = rooted;
-        emit rootedChanged(rooted);
+void Platform::setSuPath(const QString& suPath) {
+    if(suPath != mSuPath) {
+        mSuPath = suPath;
+        emit suPathChanged(suPath);
     }
 }
 

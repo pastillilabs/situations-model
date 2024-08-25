@@ -16,7 +16,7 @@ class MODEL_SHARED_EXPORT Platform : public QObject {
     QML_ELEMENT
     Q_PROPERTY(ContactList* contacts READ contacts CONSTANT)
     Q_PROPERTY(PackageList* packages READ packages CONSTANT)
-    Q_PROPERTY(bool rooted READ isRooted WRITE setRooted NOTIFY rootedChanged)
+    Q_PROPERTY(QString suPath READ suPath WRITE setSuPath NOTIFY suPathChanged)
     Q_PROPERTY(int version READ version WRITE setVersion NOTIFY versionChanged)
 
 public:
@@ -25,14 +25,14 @@ public:
     ContactList* contacts() const;
     PackageList* packages() const;
 
-    bool isRooted() const;
-    void setRooted(bool rooted);
+    const QString& suPath() const;
+    void setSuPath(const QString& suPath);
 
     int version() const;
     void setVersion(int version);
 
 signals:
-    void rootedChanged(bool rooted);
+    void suPathChanged(const QString& suPath);
     void versionChanged(int version);
 
     // Methods
@@ -42,7 +42,7 @@ private:
     ContactList* mContacts{nullptr};
     PackageList* mPackages{nullptr};
 
-    bool mRooted{false};
+    QString mSuPath;
     int mVersion{0};
 };
 
