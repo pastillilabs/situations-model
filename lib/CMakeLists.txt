@@ -21,6 +21,8 @@ qt_add_qml_module(${PROJECT_NAME}
         ${SOURCES_PLATFORM}
 )
 
+add_compile_definitions(ANDROID_ABI="${ANDROID_ABI}")
+
 target_link_libraries(${PROJECT_NAME}
     PRIVATE
         Qt${QT_VERSION_MAJOR}::Core
