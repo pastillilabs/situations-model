@@ -1,3 +1,7 @@
-#include "logging.h"
+#include "situations-model/logging.h"
 
-Q_LOGGING_CATEGORY(model, "situations.model", QtWarningMsg)
+namespace Model {
+
+Q_LOGGING_CATEGORY(category, "com.pastillilabs.situations.model", QtWarningMsg)
+
+} // namespace Model

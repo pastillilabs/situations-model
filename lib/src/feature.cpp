@@ -1,5 +1,5 @@
 #include "situations-model/feature.h"
-#include "logging.h"
+#include "situations-model/logging.h"
 #include "util.h"
 
 #include <xylitol/util.h>
@@ -20,8 +20,8 @@ Feature::Feature(QObject* parent)
         if(!name().isEmpty() && TypeFlags::fromInt(typeFlags()).testFlag(TypeFlagPlugin)) {
             pluginLoader = new QPluginLoader(Util::pluginPath(name()), this);
             if(!pluginLoader->load()) {
-                qCWarning(model) << "Failed to load plugin" << name();
-                qCWarning(model) << "Error:" << pluginLoader->errorString();
+                qCWarning(category) << "Failed to load plugin" << name();
+                qCWarning(category) << "Error:" << pluginLoader->errorString();
 
                 delete pluginLoader;
                 pluginLoader = nullptr;
@@ -252,8 +252,8 @@ Plugin* Feature::createPlugin() {
             setPlugin(plugin);
         }
         else {
-            qCWarning(model) << "Failed to instantiate plugin" << mPluginLoader->fileName();
-            qCWarning(model) << "Error:" << mPluginLoader->errorString();
+            qCWarning(category) << "Failed to instantiate plugin" << mPluginLoader->fileName();
+            qCWarning(category) << "Error:" << mPluginLoader->errorString();
         }
     }
 
@@ -287,8 +287,8 @@ QVariant Feature::xylitolFromVariant(const QMetaProperty& metaProperty, const QV
                 value = QVariant::fromValue(plugin);
             }
             else {
-                qCWarning(model) << "Failed to instantiate plugin" << mPluginLoader->fileName();
-                qCWarning(model) << "Error:" << mPluginLoader->errorString();
+                qCWarning(category) << "Failed to instantiate plugin" << mPluginLoader->fileName();
+                qCWarning(category) << "Error:" << mPluginLoader->errorString();
             }
         }
     }
