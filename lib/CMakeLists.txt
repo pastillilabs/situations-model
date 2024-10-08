@@ -1,7 +1,5 @@
 cmake_minimum_required(VERSION 3.27)
 
-set(TARGET_NAME model)
-
 project(${APP_NAME}${TARGET_NAME} LANGUAGES CXX)
 
 find_package(Qt6 6.5 REQUIRED COMPONENTS Core Quick)
