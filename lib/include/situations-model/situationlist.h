@@ -53,7 +53,7 @@ signals:
     void countChanged(int count);
 
     // Methods
-    void reqAdd(const QString& name, const QString& icon, const QJsonObject& metaData);
+    void reqAdd(const QString& uid, const QString& name, const QString& icon, const QJsonObject& metaData);
     void reqRemove(const QString& uid);
     void reqMove(const QString& uid, int index);
 
