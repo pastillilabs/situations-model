@@ -99,7 +99,7 @@ private:
     QJsonObject mMetaData;
     bool mManual{false};
     QDateTime mTimingStart;
-    QTime mTimingDuration;
+    QTime mTimingDuration{1, 0}; // Default to 1 hour
     bool mProposal{false};
     bool mActive{false};
 };

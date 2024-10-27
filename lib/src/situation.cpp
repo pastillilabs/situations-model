@@ -15,6 +15,7 @@ QJsonObject Situation::toJson(bool persistent) const {
             {QLatin1String("icon"), mIcon},
             {QLatin1String("metaData"), mMetaData},
             {QLatin1String("manual"), mManual},
+            {QLatin1String("timingStart"), mTimingStart.toString(Qt::DateFormat::ISODate)},
             {QLatin1String("timingDuration"), mTimingDuration.toString(Qt::DateFormat::ISODate)},
             {QLatin1String("actionGroups"), mActionGroups->toJson(persistent)},
             {QLatin1String("conditionGroups"), mConditionGroups->toJson(persistent)}
@@ -25,7 +26,6 @@ QJsonObject Situation::toJson(bool persistent) const {
             {QLatin1String("uid"), mUid},
             {QLatin1String("proposal"), isProposal()},
             {QLatin1String("active"), isActive()},
-            {QLatin1String("timingStart"), mTimingStart.toString(Qt::DateFormat::ISODate)},
         };
     }
 }
@@ -43,6 +43,7 @@ void Situation::fromJson(const QJsonObject& jsonObject, bool persistent) {
         const QJsonValue icon = jsonObject.value(QLatin1String("icon"));
         const QJsonValue metaData = jsonObject.value(QLatin1String("metaData"));
         const QJsonValue manual = jsonObject.value(QLatin1String("manual"));
+        const QJsonValue timingStart = jsonObject.value(QLatin1String("timingStart"));
         const QJsonValue timingDuration = jsonObject.value(QLatin1String("timingDuration"));
 
         if(!uid.isUndefined()) setUid(uid.toString());
@@ -50,16 +51,15 @@ void Situation::fromJson(const QJsonObject& jsonObject, bool persistent) {
         if(!icon.isUndefined()) setIcon(icon.toString());
         if(!metaData.isUndefined()) setMetaData(metaData.toObject());
         if(!manual.isUndefined()) setManual(manual.toBool());
+        if(!timingStart.isUndefined()) setTimingStart(QDateTime::fromString(timingStart.toString(), Qt::DateFormat::ISODate));
         if(!timingDuration.isUndefined()) setTimingDuration(QTime::fromString(timingDuration.toString(), Qt::DateFormat::ISODate));
     }
     else {
         const QJsonValue proposal = jsonObject.value(QLatin1String("proposal"));
         const QJsonValue active = jsonObject.value(QLatin1String("active"));
-        const QJsonValue timingStart = jsonObject.value(QLatin1String("timingStart"));
 
         if(!proposal.isUndefined()) setProposal(proposal.toBool());
         if(!active.isUndefined()) setActive(active.toBool());
-        if(!timingStart.isUndefined()) setTimingStart(QDateTime::fromString(timingStart.toString(), Qt::DateFormat::ISODate));
     }
 }
 
