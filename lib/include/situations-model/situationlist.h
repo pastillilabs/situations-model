@@ -56,6 +56,7 @@ signals:
     void reqAdd(const QString& uid, const QString& name, const QString& icon, const QJsonObject& metaData);
     void reqRemove(const QString& uid);
     void reqMove(const QString& uid, int index);
+    void reqClone(const QString& uid, const QString& cloneUid, const QString& name);
 
 public: // From Xylitol::ListModel
     QHash<int, QByteArray> roleNames() const override;
