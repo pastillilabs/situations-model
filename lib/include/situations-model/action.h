@@ -60,6 +60,8 @@ public:
     QJsonObject toJson(bool persistent) const;
     void fromJson(const QJsonObject& jsonObject, bool persistent);
 
+    void clone(const Action& source);
+
     const QString& uid() const;
     void setUid(const QString& uid);
 

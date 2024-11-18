@@ -97,7 +97,9 @@ void Plugin::fromJson(const QJsonObject& jsonObject, [[maybe_unused]] bool persi
     if(!persistent) {
         const QJsonValue stash = jsonObject.value(QLatin1String("stash"));
 
-        if(!stash.isUndefined()) setStash(stash.toObject());
+        if(!stash.isUndefined()) {
+            setStash(stash.toObject());
+        }
     }
 }
 

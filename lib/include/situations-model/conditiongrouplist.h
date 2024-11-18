@@ -34,6 +34,8 @@ public:
     QJsonObject toJson(bool persistent) const;
     void fromJson(const QJsonObject& jsonObject, bool persistent);
 
+    void clone(const ConditionGroupList& source);
+
     void add(const QString& name, int priority);
     void remove(const QString& name);
     int indexOfName(const QString& name) const;

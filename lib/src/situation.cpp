@@ -25,7 +25,7 @@ QJsonObject Situation::toJson(bool persistent) const {
         return {
             {QLatin1String("uid"), mUid},
             {QLatin1String("proposal"), isProposal()},
-            {QLatin1String("active"), isActive()},
+            {QLatin1String("active"), isActive()}
         };
     }
 }
@@ -34,8 +34,12 @@ void Situation::fromJson(const QJsonObject& jsonObject, bool persistent) {
     const QJsonValue actionGroups = jsonObject.value(QLatin1String("actionGroups"));
     const QJsonValue conditionGroups = jsonObject.value(QLatin1String("conditionGroups"));
 
-    if(!actionGroups.isUndefined()) this->actionGroups()->fromJson(actionGroups.toObject(), persistent);
-    if(!conditionGroups.isUndefined()) this->conditionGroups()->fromJson(conditionGroups.toObject(), persistent);
+    if(!actionGroups.isUndefined()) {
+        this->actionGroups()->fromJson(actionGroups.toObject(), persistent);
+    }
+    if(!conditionGroups.isUndefined()) {
+        this->conditionGroups()->fromJson(conditionGroups.toObject(), persistent);
+    }
 
     if(persistent) {
         const QJsonValue uid = jsonObject.value(QLatin1String("uid"));
@@ -46,21 +50,53 @@ void Situation::fromJson(const QJsonObject& jsonObject, bool persistent) {
         const QJsonValue timingStart = jsonObject.value(QLatin1String("timingStart"));
         const QJsonValue timingDuration = jsonObject.value(QLatin1String("timingDuration"));
 
-        if(!uid.isUndefined()) setUid(uid.toString());
-        if(!name.isUndefined()) setName(name.toString());
-        if(!icon.isUndefined()) setIcon(icon.toString());
-        if(!metaData.isUndefined()) setMetaData(metaData.toObject());
-        if(!manual.isUndefined()) setManual(manual.toBool());
-        if(!timingStart.isUndefined()) setTimingStart(QDateTime::fromString(timingStart.toString(), Qt::DateFormat::ISODate));
-        if(!timingDuration.isUndefined()) setTimingDuration(QTime::fromString(timingDuration.toString(), Qt::DateFormat::ISODate));
+        if(!uid.isUndefined()) {
+            setUid(uid.toString());
+        }
+        if(!name.isUndefined()) {
+            setName(name.toString());
+        }
+        if(!icon.isUndefined()) {
+            setIcon(icon.toString());
+        }
+        if(!metaData.isUndefined()) {
+            setMetaData(metaData.toObject());
+        }
+        if(!manual.isUndefined()) {
+            setManual(manual.toBool());
+        }
+        if(!timingStart.isUndefined()) {
+            setTimingStart(QDateTime::fromString(timingStart.toString(), Qt::DateFormat::ISODate));
+        }
+        if(!timingDuration.isUndefined()) {
+            setTimingDuration(QTime::fromString(timingDuration.toString(), Qt::DateFormat::ISODate));
+        }
     }
     else {
         const QJsonValue proposal = jsonObject.value(QLatin1String("proposal"));
         const QJsonValue active = jsonObject.value(QLatin1String("active"));
 
-        if(!proposal.isUndefined()) setProposal(proposal.toBool());
-        if(!active.isUndefined()) setActive(active.toBool());
+        if(!proposal.isUndefined()) {
+            setProposal(proposal.toBool());
+        }
+        if(!active.isUndefined()) {
+            setActive(active.toBool());
+        }
     }
+}
+
+void Situation::clone(const Situation& source, const QString& uid, const QString& name) {
+    setUid(uid);
+    setName(name);
+    setIcon(source.icon());
+    setMetaData(source.metaData());
+    setManual(source.isManual());
+    setTimingStart(source.timingStart());
+    setTimingDuration(source.timingDuration());
+
+    // Clone conditions & actions from source
+    actionGroups()->clone(*source.actionGroups());
+    conditionGroups()->clone(*source.conditionGroups());
 }
 
 ActionGroupList* Situation::actionGroups() const {

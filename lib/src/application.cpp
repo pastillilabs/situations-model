@@ -42,10 +42,18 @@ void Application::fromJson(const QJsonObject& jsonObject, bool persistent, const
     const QJsonValue situations = jsonObject.value(QLatin1String("situations"));
     const QJsonValue settings = jsonObject.value(QLatin1String("settings"));
 
-    if(!build.isUndefined()) setBuild(build.toInt());
-    if(!features.isUndefined()) mFeatures->fromJson(features.toObject(), persistent);
-    if(!situations.isUndefined()) mSituations->fromJson(situations.toObject(), persistent, situationInitializer);
-    if(!settings.isUndefined()) mSettings->fromJson(settings.toObject(), persistent);
+    if(!build.isUndefined()) {
+        setBuild(build.toInt());
+    }
+    if(!features.isUndefined()) {
+        mFeatures->fromJson(features.toObject(), persistent);
+    }
+    if(!situations.isUndefined()) {
+        mSituations->fromJson(situations.toObject(), persistent, situationInitializer);
+    }
+    if(!settings.isUndefined()) {
+        mSettings->fromJson(settings.toObject(), persistent);
+    }
 }
 
 Application::~Application() {

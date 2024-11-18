@@ -51,6 +51,8 @@ public:
     QJsonObject toJson(bool persistent) const;
     void fromJson(const QJsonObject& jsonObject, bool persistent);
 
+    void clone(const Condition& source);
+
     const QString& uid() const;
     void setUid(const QString& uid);
 

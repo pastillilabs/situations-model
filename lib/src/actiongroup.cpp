@@ -47,6 +47,16 @@ void ActionGroup::fromJson(const QJsonObject& jsonObject, bool persistent) {
     }
 }
 
+void ActionGroup::clone(const ActionGroup& source) {
+    for(const Model::ActionGroup::Item& item : source.container()) {
+        const Model::Action* sourceAction = item.value(Model::ActionGroup::RoleAction).value<Model::Action*>();
+
+        add([&](Model::Action& action) {
+            action.clone(*sourceAction);
+        });
+    }
+}
+
 const QString& ActionGroup::name() const {
     return mName;
 }

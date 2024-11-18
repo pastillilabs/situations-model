@@ -58,7 +58,19 @@ void ConditionGroup::fromJson(const QJsonObject& jsonObject, bool persistent) {
     if(persistent) {
         const QJsonValue negative = jsonObject.value(QLatin1String("negative"));
 
-        if(!negative.isUndefined()) setNegative(negative.toBool());
+        if(!negative.isUndefined()) {
+            setNegative(negative.toBool());
+        }
+    }
+}
+
+void ConditionGroup::clone(const ConditionGroup& source) {
+    for(const Model::ConditionGroup::Item& item : source.container()) {
+        const Model::Condition* sourceCondition = item.value(Model::ConditionGroup::RoleCondition).value<Model::Condition*>();
+
+        add([&](Model::Condition& condition) {
+            condition.clone(*sourceCondition);
+        });
     }
 }
 

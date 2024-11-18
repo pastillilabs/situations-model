@@ -28,10 +28,18 @@ void Settings::fromJson(const QJsonObject& jsonObject, bool persistent) {
         const QJsonValue theme = jsonObject.value(QLatin1String("theme"));
         const QJsonValue locale = jsonObject.value(QLatin1String("locale"));
 
-        if(!enabled.isUndefined()) setEnabled(enabled.toBool());
-        if(!notifications.isUndefined()) setNotifications(notifications.toBool());
-        if(!theme.isUndefined()) setTheme(theme.toInt());
-        if(!locale.isUndefined()) setLocale(locale.toString());
+        if(!enabled.isUndefined()) {
+            setEnabled(enabled.toBool());
+        }
+        if(!notifications.isUndefined()) {
+            setNotifications(notifications.toBool());
+        }
+        if(!theme.isUndefined()) {
+            setTheme(theme.toInt());
+        }
+        if(!locale.isUndefined()) {
+            setLocale(locale.toString());
+        }
     }
 }
 

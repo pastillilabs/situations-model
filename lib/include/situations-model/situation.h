@@ -40,6 +40,8 @@ public:
     QJsonObject toJson(bool persistent) const;
     void fromJson(const QJsonObject& jsonObject, bool persistent);
 
+    void clone(const Situation& source, const QString& uid, const QString& name);
+
     ActionGroupList* actionGroups() const;
     ConditionGroupList* conditionGroups() const;
 

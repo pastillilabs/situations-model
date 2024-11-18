@@ -74,20 +74,38 @@ void Feature::fromJson(const QJsonObject& jsonObject, bool persistent) {
         const QJsonValue installed = jsonObject.value(QLatin1String("installed"));
         const QJsonValue plugin = jsonObject.value(QLatin1String("plugin"));
 
-        if(!name.isUndefined()) setName(name.toString());
-        if(!price.isUndefined()) setPrice(price.toString());
-        if(!receipt.isUndefined()) setReceipt(receipt.toString());
-        if(!signature.isUndefined()) setSignature(signature.toString());
-        if(!removeDate.isUndefined()) setRemoveDate(QDateTime::fromString(removeDate.toString(), Qt::ISODate));
-        if(!installed.isUndefined()) setInstalled(installed.toBool());
-        if(!plugin.isUndefined() && mPlugin) mPlugin->fromJson(plugin.toObject(), persistent);
+        if(!name.isUndefined()) {
+            setName(name.toString());
+        }
+        if(!price.isUndefined()) {
+            setPrice(price.toString());
+        }
+        if(!receipt.isUndefined()) {
+            setReceipt(receipt.toString());
+        }
+        if(!signature.isUndefined()) {
+            setSignature(signature.toString());
+        }
+        if(!removeDate.isUndefined()) {
+            setRemoveDate(QDateTime::fromString(removeDate.toString(), Qt::ISODate));
+        }
+        if(!installed.isUndefined()) {
+            setInstalled(installed.toBool());
+        }
+        if(!plugin.isUndefined() && mPlugin) {
+            mPlugin->fromJson(plugin.toObject(), persistent);
+        }
     }
     else {
         const QJsonValue purchaseState = jsonObject.value(QLatin1String("purchaseState"));
         const QJsonValue plugin = jsonObject.value(QLatin1String("plugin"));
 
-        if(!purchaseState.isUndefined()) setPurchaseState(static_cast<PurchaseState>(purchaseState.toInt()));
-        if(!plugin.isUndefined() && mPlugin) mPlugin->fromJson(plugin.toObject(), persistent);
+        if(!purchaseState.isUndefined()) {
+            setPurchaseState(static_cast<PurchaseState>(purchaseState.toInt()));
+        }
+        if(!plugin.isUndefined() && mPlugin) {
+            mPlugin->fromJson(plugin.toObject(), persistent);
+        }
     }
 }
 

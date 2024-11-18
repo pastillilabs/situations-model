@@ -39,6 +39,8 @@ public:
     QJsonObject toJson(bool persistent) const;
     void fromJson(const QJsonObject& jsonObject, bool persistent);
 
+    void clone(const ActionGroup& source);
+
     const QString& name() const;
     void setName(const QString& name);
 

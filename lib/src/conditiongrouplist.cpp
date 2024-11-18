@@ -34,6 +34,18 @@ void ConditionGroupList::fromJson(const QJsonObject& jsonObject, bool persistent
     }
 }
 
+void ConditionGroupList::clone(const ConditionGroupList& source) {
+    for(const Model::ConditionGroupList::Item& item : source.container()) {
+        const Model::ConditionGroup* sourceGroup = item.value(Model::ConditionGroupList::RoleGroup).value<Model::ConditionGroup*>();
+        const QString& name = sourceGroup->name();
+
+        Model::ConditionGroup* conditionGroup = findByName(name);
+        if(conditionGroup) {
+            conditionGroup->clone(*sourceGroup);
+        }
+    }
+}
+
 void ConditionGroupList::add(const QString& name, int priority) {
     const int currentIndex = indexOfName(name);
     if(currentIndex < 0) {

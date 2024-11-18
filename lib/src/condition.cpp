@@ -24,10 +24,22 @@ void Condition::fromJson(const QJsonObject& jsonObject, bool persistent) {
         const QJsonValue payload = jsonObject.value(QLatin1String("payload"));
         const QJsonValue delay = jsonObject.value(QLatin1String("delay"));
 
-        if(!uid.isUndefined()) setUid(uid.toString());
-        if(!payload.isUndefined()) setPayload(payload.toObject());
-        if(!delay.isUndefined()) setDelay(delay.toInt());
+        if(!uid.isUndefined()) {
+            setUid(uid.toString());
+        }
+        if(!payload.isUndefined()) {
+            setPayload(payload.toObject());
+        }
+        if(!delay.isUndefined()) {
+            setDelay(delay.toInt());
+        }
     }
+}
+
+void Condition::clone(const Condition& source) {
+    setUid(source.uid());
+    setPayload(source.payload());
+    setDelay(source.delay());
 }
 
 const QString& Condition::uid() const {

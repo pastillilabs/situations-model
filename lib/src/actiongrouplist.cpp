@@ -34,6 +34,18 @@ void ActionGroupList::fromJson(const QJsonObject& jsonObject, bool persistent) {
     }
 }
 
+void ActionGroupList::clone(const ActionGroupList& source) {
+    for(const Model::ActionGroupList::Item& item : source.container()) {
+        const Model::ActionGroup* sourceGroup = item.value(Model::ActionGroupList::RoleGroup).value<Model::ActionGroup*>();
+        const QString& name = sourceGroup->name();
+
+        Model::ActionGroup* actionGroup = findByName(name);
+        if(actionGroup) {
+            actionGroup->clone(*sourceGroup);
+        }
+    }
+}
+
 void ActionGroupList::add(const QString& name, int priority) {
     const int currentIndex = indexOfName(name);
     if(currentIndex < 0) {
