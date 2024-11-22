@@ -76,6 +76,17 @@ SituationList* Application::situations() const {
     return mSituations;
 }
 
+bool Application::isExporting() const {
+    return mExporting;
+}
+
+void Application::setExporting(bool exporting) {
+    if(exporting != mExporting) {
+        mExporting = exporting;
+        emit exportingChanged(exporting);
+    }
+}
+
 bool Application::isImporting() const {
     return mImporting;
 }
