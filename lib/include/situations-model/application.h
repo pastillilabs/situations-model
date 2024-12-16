@@ -25,7 +25,6 @@ class MODEL_SHARED_EXPORT Application : public QObject {
     Q_PROPERTY(Platform* platform READ platform CONSTANT)
     Q_PROPERTY(Settings* settings READ settings CONSTANT)
     Q_PROPERTY(SituationList* situations READ situations CONSTANT)
-    Q_PROPERTY(bool exporting READ isExporting WRITE setExporting NOTIFY exportingChanged)
     Q_PROPERTY(bool importing READ isImporting WRITE setImporting NOTIFY importingChanged)
     Q_PROPERTY(bool restarting READ isRestarting WRITE setRestarting NOTIFY restartingChanged)
     Q_PROPERTY(int build READ build WRITE setBuild NOTIFY buildChanged)
@@ -45,9 +44,6 @@ public:
     Settings* settings() const;
     SituationList* situations() const;
 
-    bool isExporting() const;
-    void setExporting(bool exporting);
-
     bool isImporting() const;
     void setImporting(bool importing);
 
@@ -58,15 +54,14 @@ public:
     void setBuild(int build);
 
 signals:
-    void exportingChanged(bool exporting);
     void importingChanged(bool importing);
     void restartingChanged(bool restarting);
     void buildChanged(int build);
 
     // Methods
     void reqExport();
-    void reqImport(const QJsonObject& jsonObject);
     void indExport(const QJsonObject& jsonObject);
+    void reqImport(const QJsonObject& jsonObject);
     void indImport();
     void reqRestart();
 
@@ -76,7 +71,6 @@ private:
     Settings* mSettings{nullptr};
     SituationList* mSituations{nullptr};
 
-    bool mExporting{false};
     bool mImporting{false};
     bool mRestarting{false};
     int mBuild{0};
