@@ -34,7 +34,8 @@ public:
     bool isUpdating() const;
     void setUpdating(bool updating);
 
-    void reset(const QVector<Item>& contacts);
+    void reset(const Container& container);
+    void update(const Item& item);
 
     Q_INVOKABLE int indexOf(const QString& id) const;
     Q_INVOKABLE QString idByIndex(int index) const;

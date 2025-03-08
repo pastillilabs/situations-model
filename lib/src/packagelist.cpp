@@ -18,10 +18,65 @@ void PackageList::setUpdating(bool updating) {
     }
 }
 
-void PackageList::reset(const QVector<Item>& packages) {
-    beginResetModel();
-    mContainer = packages;
-    endResetModel();
+void PackageList::reset(const Container& container) {
+    // Find items to be removed from mContainer
+    Container remove;
+    for(const Item& item : std::as_const(mContainer)) {
+        const QString id = item.value(RoleId).toString();
+
+        // Is id in new container?
+        const auto it = std::find_if(std::cbegin(container), std::cend(container), [id](const Item& item) {
+            return item.value(RoleId).toString() == id;
+        });
+        // Id not found -> to be removed
+        if(it == std::cend(container)) {
+            remove.append(item);
+        }
+    }
+
+    // Remove items
+    while(remove.size()) {
+        const Item item = remove.takeFirst();
+        const int index = indexOf(item.value(RoleId).toString());
+
+        beginRemoveRows(QModelIndex(), index, index);
+        mContainer.removeAt(index);
+        endRemoveRows();
+    }
+
+    // Update rest
+    for(const Item& item : std::as_const(container)) {
+        update(item);
+    }
+}
+
+void PackageList::update(const Item& item) {
+    const int currentIndex = indexOf(item.value(RoleId).toString());
+    if(currentIndex >= 0) {
+        QVector<int> roles;
+
+        const Item& old = mContainer.at(currentIndex);
+        if(old.value(RoleId).toString() != item.value(RoleId).toString()) {
+            roles.append(Role::RoleId);
+        }
+        if(old.value(RoleName).toString() != item.value(RoleName).toString()) {
+            roles.append(Role::RoleName);
+        }
+
+        if(!roles.isEmpty()) {
+            mContainer.replace(currentIndex, item);
+
+            const QModelIndex modelIndex = this->index(currentIndex);
+            emit dataChanged(modelIndex, modelIndex, roles);
+        }
+    }
+    else {
+        const int index = mContainer.count();
+
+        beginInsertRows(QModelIndex(), index, index);
+        mContainer.append(item);
+        endInsertRows();
+    }
 }
 
 int PackageList::indexOf(const QString& id) const {
