@@ -15,6 +15,17 @@ PackageList* Platform::packages() const {
     return mPackages;
 }
 
+const QString& Platform::locale() const {
+    return mLocale;
+}
+
+void Platform::setLocale(const QString& locale) {
+    if(locale != mLocale) {
+        mLocale = locale;
+        emit localeChanged(locale);
+    }
+}
+
 const QString& Platform::suPath() const {
     return mSuPath;
 }
