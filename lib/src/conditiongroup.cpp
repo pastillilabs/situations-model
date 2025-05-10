@@ -6,9 +6,12 @@ namespace Model {
 
 ConditionGroup::ConditionGroup(QObject* parent)
     : Xylitol::ListModel(parent) {
-    connect(this, &ConditionGroup::rowsInserted, this, [this] { emit countChanged(count()); });
-    connect(this, &ConditionGroup::rowsRemoved, this, [this] { emit countChanged(count()); });
-    connect(this, &ConditionGroup::modelReset, this, [this] { emit countChanged(count()); });
+    connect(this, &ConditionGroup::rowsInserted,
+            this, [this] { emit countChanged(count()); });
+    connect(this, &ConditionGroup::rowsRemoved,
+            this, [this] { emit countChanged(count()); });
+    connect(this, &ConditionGroup::modelReset,
+            this, [this] { emit countChanged(count()); });
 }
 
 QJsonObject ConditionGroup::toJson(bool persistent) const {

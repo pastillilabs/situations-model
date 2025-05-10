@@ -31,8 +31,10 @@ Feature::Feature(QObject* parent)
         setPluginLoader(pluginLoader);
     };
 
-    connect(this, &Feature::nameChanged, this, resetPluginLoader);
-    connect(this, &Feature::typeFlagsChanged, this, resetPluginLoader);
+    connect(this, &Feature::nameChanged,
+            this, resetPluginLoader);
+    connect(this, &Feature::typeFlagsChanged,
+            this, resetPluginLoader);
 }
 
 Feature::~Feature() {

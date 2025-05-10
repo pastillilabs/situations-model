@@ -38,20 +38,25 @@ FeatureList::FeatureList(QObject* parent)
                 for(int i = first; i <= last; ++i) {
                     const Item& item = mContainer.at(i);
                     const Feature* feature = item.value(FeatureList::RoleFeature).value<Feature*>();
-                    connect(feature, &Feature::installedChanged, this, updateHelpers);
-                    connect(feature, &Feature::purchaseStateChanged, this, updateHelpers);
+                    connect(feature, &Feature::installedChanged,
+                            this, updateHelpers);
+                    connect(feature, &Feature::purchaseStateChanged,
+                            this, updateHelpers);
                 }
 
                 updateHelpers();
             });
-    connect(this, &FeatureList::rowsRemoved, this, updateHelpers);
+    connect(this, &FeatureList::rowsRemoved,
+            this, updateHelpers);
     connect(this, &FeatureList::modelReset,
             this, [this, updateHelpers] {
                 const auto& container = mContainer;
                 for(const Item& item : container) {
                     const Feature* feature = item.value(FeatureList::RoleFeature).value<Feature*>();
-                    connect(feature, &Feature::installedChanged, this, updateHelpers);
-                    connect(feature, &Feature::purchaseStateChanged, this, updateHelpers);
+                    connect(feature, &Feature::installedChanged,
+                            this, updateHelpers);
+                    connect(feature, &Feature::purchaseStateChanged,
+                            this, updateHelpers);
                 }
 
                 updateHelpers();

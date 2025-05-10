@@ -8,9 +8,12 @@ namespace Model {
 
 SituationList::SituationList(QObject* parent)
     : Xylitol::ListModel(parent) {
-    connect(this, &SituationList::rowsInserted, this, [this] { emit countChanged(count()); });
-    connect(this, &SituationList::rowsRemoved, this, [this] { emit countChanged(count()); });
-    connect(this, &SituationList::modelReset, this, [this] { emit countChanged(count()); });
+    connect(this, &SituationList::rowsInserted,
+            this, [this] { emit countChanged(count()); });
+    connect(this, &SituationList::rowsRemoved,
+            this, [this] { emit countChanged(count()); });
+    connect(this, &SituationList::modelReset,
+            this, [this] { emit countChanged(count()); });
 }
 
 QJsonObject SituationList::toJson(bool persistent) const {

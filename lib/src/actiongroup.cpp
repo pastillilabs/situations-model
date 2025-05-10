@@ -6,9 +6,12 @@ namespace Model {
 
 ActionGroup::ActionGroup(QObject* parent)
     : Xylitol::ListModel(parent) {
-    connect(this, &ActionGroup::rowsInserted, this, [this] { emit countChanged(count()); });
-    connect(this, &ActionGroup::rowsRemoved, this, [this] { emit countChanged(count()); });
-    connect(this, &ActionGroup::modelReset, this, [this] { emit countChanged(count()); });
+    connect(this, &ActionGroup::rowsInserted,
+            this, [this] { emit countChanged(count()); });
+    connect(this, &ActionGroup::rowsRemoved,
+            this, [this] { emit countChanged(count()); });
+    connect(this, &ActionGroup::modelReset,
+            this, [this] { emit countChanged(count()); });
 }
 
 QJsonObject ActionGroup::toJson(bool persistent) const {
