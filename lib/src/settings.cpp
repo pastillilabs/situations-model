@@ -11,6 +11,7 @@ QJsonObject Settings::toJson(bool persistent) const {
     if(persistent) {
         return {
             {QLatin1String("enabled"), mEnabled},
+            {QLatin1String("logging"), mLogging},
             {QLatin1String("notifications"), mNotifications},
             {QLatin1String("theme"), mTheme},
             {QLatin1String("locale"), mLocale}
@@ -24,12 +25,16 @@ QJsonObject Settings::toJson(bool persistent) const {
 void Settings::fromJson(const QJsonObject& jsonObject, bool persistent) {
     if(persistent) {
         const QJsonValue enabled = jsonObject.value(QLatin1String("enabled"));
+        const QJsonValue logging = jsonObject.value(QLatin1String("logging"));
         const QJsonValue notifications = jsonObject.value(QLatin1String("notifications"));
         const QJsonValue theme = jsonObject.value(QLatin1String("theme"));
         const QJsonValue locale = jsonObject.value(QLatin1String("locale"));
 
         if(!enabled.isUndefined()) {
             setEnabled(enabled.toBool());
+        }
+        if(!logging.isUndefined()) {
+            setLogging(logging.toBool());
         }
         if(!notifications.isUndefined()) {
             setNotifications(notifications.toBool());
@@ -51,6 +56,17 @@ void Settings::setEnabled(bool enabled) {
     if(enabled != mEnabled) {
         mEnabled = enabled;
         emit enabledChanged(enabled);
+    }
+}
+
+bool Settings::isLogging() const {
+    return mLogging;
+}
+
+void Settings::setLogging(bool logging) {
+    if(logging != mLogging) {
+        mLogging = logging;
+        emit loggingChanged(logging);
     }
 }
 
