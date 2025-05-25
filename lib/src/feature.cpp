@@ -1,6 +1,5 @@
 #include "situations-model/feature.h"
 #include "situations-model/logging.h"
-#include "util.h"
 
 #include <xylitol/util.h>
 
@@ -10,22 +9,35 @@
 
 namespace Model {
 
+QString sPluginPath;
+
+void Feature::setPluginPath(const QString& pluginPath) {
+    sPluginPath = pluginPath;
+}
+
 Feature::Feature(QObject* parent)
     : QObject(parent) {
     const auto resetPluginLoader = [this] {
         delete mPluginLoader;
         mPluginLoader = nullptr;
 
-        QPluginLoader* pluginLoader{nullptr};
-        if(!name().isEmpty() && TypeFlags::fromInt(typeFlags()).testFlag(TypeFlagPlugin)) {
-            pluginLoader = new QPluginLoader(Util::pluginPath(name()), this);
-            if(!pluginLoader->load()) {
-                qCWarning(category) << "Failed to load plugin" << name();
-                qCWarning(category) << "Error:" << pluginLoader->errorString();
+        const QString name = this->name();
 
-                delete pluginLoader;
-                pluginLoader = nullptr;
+        QPluginLoader* pluginLoader{nullptr};
+        if(!sPluginPath.isEmpty()) {
+            if(!name.isEmpty() && TypeFlags::fromInt(typeFlags()).testFlag(TypeFlagPlugin)) {
+                pluginLoader = new QPluginLoader(sPluginPath.arg(name), this);
+                if(!pluginLoader->load()) {
+                    qCWarning(category) << "Failed to load plugin" << name;
+                    qCWarning(category) << "Error:" << pluginLoader->errorString();
+
+                    delete pluginLoader;
+                    pluginLoader = nullptr;
+                }
             }
+        }
+        else {
+            qCWarning(category) << "Plugin path has not been set";
         }
 
         setPluginLoader(pluginLoader);

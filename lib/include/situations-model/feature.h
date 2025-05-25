@@ -39,6 +39,9 @@ class MODEL_SHARED_EXPORT Feature : public QObject {
     Q_PROPERTY(QPluginLoader* pluginLoader READ pluginLoader NOTIFY pluginLoaderChanged STORED false)
 
 public:
+    static void setPluginPath(const QString& pluginPath);
+
+public:
     enum TypeFlag {
         TypeFlagNone        = 0,
         TypeFlagPlugin      = 1 << 0,

@@ -10,7 +10,6 @@ qt_standard_project_setup(
 qt_add_library(${PROJECT_NAME})
 
 file(GLOB SOURCES CONFIGURE_DEPENDS src/*.cpp src/*.h include/${APP_NAME}-${TARGET_NAME}/*.h)
-file(GLOB SOURCES_PLATFORM CONFIGURE_DEPENDS src/${SYSTEM_NAME}/*.cpp src/${SYSTEM_NAME}/*.h)
 qt_add_qml_module(${PROJECT_NAME}
     URI
         ${DOMAIN_NAME}.${COMPANY_NAME}.${APP_NAME}.${TARGET_NAME}
@@ -18,10 +17,7 @@ qt_add_qml_module(${PROJECT_NAME}
         1.0
     SOURCES
         ${SOURCES}
-        ${SOURCES_PLATFORM}
 )
-
-add_compile_definitions(ANDROID_ABI="${ANDROID_ABI}")
 
 target_link_libraries(${PROJECT_NAME}
     PRIVATE
