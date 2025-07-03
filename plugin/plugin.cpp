@@ -1,30 +1,30 @@
 #include "plugin.h"
 
-#include <situations-model/action.h>
-#include <situations-model/actiongroup.h>
-#include <situations-model/actiongrouplist.h>
-#include <situations-model/actionproperties.h>
-#include <situations-model/application.h>
-#include <situations-model/condition.h>
-#include <situations-model/conditiongroup.h>
-#include <situations-model/conditiongrouplist.h>
-#include <situations-model/conditionproperties.h>
-#include <situations-model/contactlist.h>
-#include <situations-model/feature.h>
-#include <situations-model/featurelist.h>
-#include <situations-model/packagelist.h>
-#include <situations-model/platform.h>
-#include <situations-model/plugin.h>
-#include <situations-model/settings.h>
-#include <situations-model/situation.h>
-#include <situations-model/situationlist.h>
-#include <situations-model/versionlimits.h>
+#include <SituationsModel/action.h>
+#include <SituationsModel/actiongroup.h>
+#include <SituationsModel/actiongrouplist.h>
+#include <SituationsModel/actionproperties.h>
+#include <SituationsModel/application.h>
+#include <SituationsModel/condition.h>
+#include <SituationsModel/conditiongroup.h>
+#include <SituationsModel/conditiongrouplist.h>
+#include <SituationsModel/conditionproperties.h>
+#include <SituationsModel/contactlist.h>
+#include <SituationsModel/feature.h>
+#include <SituationsModel/featurelist.h>
+#include <SituationsModel/packagelist.h>
+#include <SituationsModel/platform.h>
+#include <SituationsModel/plugin.h>
+#include <SituationsModel/settings.h>
+#include <SituationsModel/situation.h>
+#include <SituationsModel/situationlist.h>
+#include <SituationsModel/versionlimits.h>
 
 #include <qqml.h>
 
 void Plugin::registerTypes([[maybe_unused]] const char* uri) {
 #if(QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
-    // @uri com.pastillilabs.situations.model
+    // @uri SituationsModel
 #if QT_VERSION >= QT_VERSION_CHECK(5, 9, 0)
     qmlRegisterModule(uri, 1, 0);
 #endif

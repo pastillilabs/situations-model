@@ -1,4 +1,4 @@
-uri = com.pastillilabs.situations.model
+uri = SituationsModel
 
 TEMPLATE = lib
 TARGET = $$qtLibraryTarget(situationsmodelplugin)

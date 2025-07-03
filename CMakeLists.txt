@@ -1,8 +1,8 @@
-set(TARGET_NAME model)
+set(TARGET_NAME Model)
 
-project(${APP_NAME}${TARGET_NAME}-root LANGUAGES CXX)
+project(${APP_NAME}${TARGET_NAME}Root LANGUAGES CXX)
 
-add_subdirectory(lib)
+add_subdirectory(lib/${APP_NAME}${TARGET_NAME})
 
 add_custom_target(${PROJECT_NAME}
     SOURCES
