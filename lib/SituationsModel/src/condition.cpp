@@ -10,7 +10,7 @@ QJsonObject Condition::toJson(bool persistent) const {
         return {
             {QLatin1String("uid"), mUid},
             {QLatin1String("payload"), mPayload},
-            {QLatin1String("delay"), mDelay}
+            {QLatin1String("settings"), mSettings}
         };
     }
     else {
@@ -22,7 +22,7 @@ void Condition::fromJson(const QJsonObject& jsonObject, bool persistent) {
     if(persistent) {
         const QJsonValue uid = jsonObject.value(QLatin1String("uid"));
         const QJsonValue payload = jsonObject.value(QLatin1String("payload"));
-        const QJsonValue delay = jsonObject.value(QLatin1String("delay"));
+        const QJsonValue settings = jsonObject.value(QLatin1String("settings"));
 
         if(!uid.isUndefined()) {
             setUid(uid.toString());
@@ -30,8 +30,8 @@ void Condition::fromJson(const QJsonObject& jsonObject, bool persistent) {
         if(!payload.isUndefined()) {
             setPayload(payload.toObject());
         }
-        if(!delay.isUndefined()) {
-            setDelay(delay.toInt());
+        if(!settings.isUndefined()) {
+            setSettings(settings.toObject());
         }
     }
 }
@@ -39,7 +39,7 @@ void Condition::fromJson(const QJsonObject& jsonObject, bool persistent) {
 void Condition::clone(const Condition& source) {
     setUid(source.uid());
     setPayload(source.payload());
-    setDelay(source.delay());
+    setSettings(source.settings());
 }
 
 const QString& Condition::uid() const {
@@ -64,14 +64,14 @@ void Condition::setPayload(const QJsonObject& payload) {
     }
 }
 
-int Condition::delay() const {
-    return mDelay;
+const QJsonObject& Condition::settings() const {
+    return mSettings;
 }
 
-void Condition::setDelay(int delay) {
-    if(delay != mDelay) {
-        mDelay = delay;
-        emit delayChanged(delay);
+void Condition::setSettings(const QJsonObject& settings) {
+    if(mSettings != settings) {
+        mSettings = settings;
+        emit settingsChanged(settings);
     }
 }
 

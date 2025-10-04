@@ -17,7 +17,7 @@ class MODEL_SHARED_EXPORT Condition : public QObject {
     QML_ELEMENT
     Q_PROPERTY(QString uid READ uid WRITE setUid NOTIFY uidChanged)
     Q_PROPERTY(QJsonObject payload READ payload WRITE setPayload NOTIFY payloadChanged)
-    Q_PROPERTY(int delay READ delay WRITE setDelay NOTIFY delayChanged)
+    Q_PROPERTY(QJsonObject settings READ settings WRITE setSettings NOTIFY settingsChanged)
     Q_PROPERTY(ReadyState readyState READ readyState WRITE setReadyState NOTIFY readyStateChanged)
     Q_PROPERTY(bool running READ isRunning WRITE setRunning NOTIFY runningChanged)
     Q_PROPERTY(bool active READ isActive WRITE setActive NOTIFY activeChanged)
@@ -59,8 +59,8 @@ public:
     const QJsonObject& payload() const;
     void setPayload(const QJsonObject& payload);
 
-    int delay() const;
-    void setDelay(int delay);
+    const QJsonObject& settings() const;
+    void setSettings(const QJsonObject& settings);
 
     ReadyState readyState() const;
     void setReadyState(ReadyState readyState);
@@ -74,7 +74,7 @@ public:
 signals:
     void uidChanged(const QString& uid);
     void payloadChanged(const QJsonObject& payload);
-    void delayChanged(int delay);
+    void settingsChanged(const QJsonObject& settings);
     void readyStateChanged(Condition::ReadyState readyState);
     void runningChanged(bool running);
     void activeChanged(bool active);
@@ -86,7 +86,7 @@ signals:
 private:
     QString mUid;
     QJsonObject mPayload;
-    int mDelay{0};
+    QJsonObject mSettings;
     ReadyState mReadyState{ReadyState::ReadyStateReady};
     bool mRunning{false};
     bool mActive{false};
