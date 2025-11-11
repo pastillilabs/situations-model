@@ -25,7 +25,11 @@ Feature::Feature(QObject* parent)
 
         QPluginLoader* pluginLoader{nullptr};
         if(!sPluginPath.isEmpty()) {
+#if QT_VERSION >= QT_VERSION_CHECK(6, 2, 0)
             if(!name.isEmpty() && TypeFlags::fromInt(typeFlags()).testFlag(TypeFlagPlugin)) {
+#else
+            if(!name.isEmpty() && static_cast<TypeFlags>(typeFlags()).testFlag(TypeFlagPlugin)) {
+#endif
                 pluginLoader = new QPluginLoader(sPluginPath.arg(name), this);
                 if(!pluginLoader->load()) {
                     qCWarning(category) << "Failed to load plugin" << name;

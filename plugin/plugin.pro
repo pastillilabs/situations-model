@@ -1,24 +1,26 @@
 uri = SituationsModel
 
 TEMPLATE = lib
-TARGET = $$qtLibraryTarget(situationsmodelplugin)
+
+TARGET = $$qtLibraryTarget(SituationsModelPlugin)
 
 QT += qml quick
 CONFIG += plugin
 
 QML_IMPORT_PATH += $$OUT_PWD/qml
 
-INCLUDEPATH += $$PWD/../lib/include ../../xylitol/lib/include
-DEPENDPATH += $$PWD/../lib/include ../../xylitol/lib/include
+INCLUDEPATH += $$PWD/../lib/SituationsModel/include
+INCLUDEPATH += ../../xylitol/lib/Xylitol/include
 
-HEADERS += $$files($$PWD/*.h)
-SOURCES += $$files($$PWD/*.cpp)
+DEPENDPATH += $$PWD/../lib/SituationsModel/include
+DEPENDPATH += ../../xylitol/lib/Xylitol/include
 
-DISTFILES = qmldir
+HEADERS += $$files($$PWD/src/*.h)
+SOURCES += $$files($$PWD/src/*.cpp)
 
 include(platform/platform.pri)
 
-# Copy qmldir to output directory
-copy_qmldir.files = qmldir
-copy_qmldir.path = $$DESTDIR
-COPIES += copy_qmldir
+# Copy qml to output directory
+copy_qml.files = $$PWD/../lib/SituationsModel/qmldir
+copy_qml.path = $$DESTDIR
+COPIES += copy_qml

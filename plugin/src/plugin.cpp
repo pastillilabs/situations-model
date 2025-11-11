@@ -38,8 +38,8 @@ void Plugin::registerTypes([[maybe_unused]] const char* uri) {
     qmlRegisterType<Model::ConditionGroup>(uri, 1, 0, "ConditionGroup");
     qmlRegisterType<Model::ConditionGroupList>(uri, 1, 0, "ConditionGroupList");
     qmlRegisterType<Model::ContactList>(uri, 1, 0, "ContactList");
-    qmlRegisterType<Model::FeatureList>(uri, 1, 0, "FeatureList");
     qmlRegisterType<Model::Feature>(uri, 1, 0, "Feature");
+    qmlRegisterType<Model::FeatureList>(uri, 1, 0, "FeatureList");
     qmlRegisterType<Model::PackageList>(uri, 1, 0, "PackageList");
     qmlRegisterType<Model::Platform>(uri, 1, 0, "Platform");
     qmlRegisterType<Model::Plugin>(uri, 1, 0, "Plugin");

@@ -11,7 +11,11 @@
 #include <QObject>
 #include <QString>
 #include <QStringList>
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
 #include <QtQml/qqmlregistration.h>
+#else
+#define QML_ELEMENT
+#endif
 
 namespace Model {
 

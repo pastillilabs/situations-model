@@ -21,7 +21,12 @@ void ContactList::setUpdating(bool updating) {
 void ContactList::reset(const QVector<Item>& container) {
     // Find items to be removed from mContainer
     Container remove;
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
     for(const Item& item : std::as_const(mContainer)) {
+#else
+    const auto constContainer = mContainer;
+    for(const Item& item : constContainer) {
+#endif
         const QString id = item.value(RoleId).toString();
 
         // Is id in new container?
@@ -45,7 +50,7 @@ void ContactList::reset(const QVector<Item>& container) {
     }
 
     // Update rest
-    for(const Item& item : std::as_const(container)) {
+    for(const Item& item : container) {
         update(item);
     }
 }

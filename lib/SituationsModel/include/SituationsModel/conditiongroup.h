@@ -9,7 +9,11 @@
 #include <QJsonObject>
 #include <QObject>
 #include <QString>
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
 #include <QtQml/qqmlregistration.h>
+#else
+#define QML_ELEMENT
+#endif
 
 #include <functional>
 

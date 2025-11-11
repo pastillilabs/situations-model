@@ -1,0 +1,7 @@
+module SituationsModel
+linktarget SituationsModelPlugin
+optional plugin SituationsModelPlugin
+classname Plugin
+prefer :/qt/qml/SituationsModel/
+depends QtQuick
+
