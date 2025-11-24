@@ -21,8 +21,17 @@ class MODEL_SHARED_EXPORT Settings : public QObject {
     Q_PROPERTY(bool enabled READ isEnabled WRITE setEnabled NOTIFY enabledChanged)
     Q_PROPERTY(bool logging READ isLogging WRITE setLogging NOTIFY loggingChanged)
     Q_PROPERTY(bool notifications READ isNotifications WRITE setNotifications NOTIFY notificationsChanged)
-    Q_PROPERTY(int theme READ theme WRITE setTheme NOTIFY themeChanged)
+    Q_PROPERTY(Theme theme READ theme WRITE setTheme NOTIFY themeChanged)
     Q_PROPERTY(QString locale READ locale WRITE setLocale NOTIFY localeChanged)
+
+public:
+    enum class Theme {
+        ThemeSystem,
+        ThemeLight,
+        ThemeDark
+    };
+    Q_ENUM(Theme)
+
 
 public:
     explicit Settings(QObject* parent = nullptr);
@@ -40,8 +49,8 @@ public:
     bool isNotifications() const;
     void setNotifications(bool notifications);
 
-    int theme() const;
-    void setTheme(int theme);
+    Theme theme() const;
+    void setTheme(Theme theme);
 
     const QString& locale() const;
     void setLocale(const QString& locale);
@@ -50,21 +59,21 @@ signals:
     void enabledChanged(bool enabled);
     void loggingChanged(bool logging);
     void notificationsChanged(bool notifications);
-    void themeChanged(int theme);
+    void themeChanged(Settings::Theme theme);
     void localeChanged(const QString& locale);
 
     // Methods
     void reqSetEnabled(bool enabled);
     void reqSetLogging(bool logging);
     void reqSetNotifications(bool notifications);
-    void reqSetTheme(int theme);
+    void reqSetTheme(Settings::Theme theme);
     void reqSetLocale(const QString& locale);
 
 private:
     bool mEnabled{false};
     bool mLogging{false};
     bool mNotifications{false};
-    int mTheme{0};
+    Theme mTheme{Theme::ThemeSystem};
     QString mLocale;
 };
 

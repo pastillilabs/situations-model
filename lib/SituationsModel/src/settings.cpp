@@ -13,7 +13,7 @@ QJsonObject Settings::toJson(bool persistent) const {
             {QLatin1String("enabled"), mEnabled},
             {QLatin1String("logging"), mLogging},
             {QLatin1String("notifications"), mNotifications},
-            {QLatin1String("theme"), mTheme},
+            {QLatin1String("theme"), static_cast<int>(mTheme)},
             {QLatin1String("locale"), mLocale}
         };
     }
@@ -40,7 +40,7 @@ void Settings::fromJson(const QJsonObject& jsonObject, bool persistent) {
             setNotifications(notifications.toBool());
         }
         if(!theme.isUndefined()) {
-            setTheme(theme.toInt());
+            setTheme(static_cast<Theme>(theme.toInt()));
         }
         if(!locale.isUndefined()) {
             setLocale(locale.toString());
@@ -81,11 +81,11 @@ void Settings::setNotifications(bool notifications) {
     }
 }
 
-int Settings::theme() const {
+Settings::Theme Settings::theme() const {
     return mTheme;
 }
 
-void Settings::setTheme(int theme) {
+void Settings::setTheme(Theme theme) {
     if(theme != mTheme) {
         mTheme = theme;
         emit themeChanged(theme);
