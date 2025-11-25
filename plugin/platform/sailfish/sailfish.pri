@@ -1,4 +1,4 @@
-DESTDIR = qml/$$replace(uri, \., /)
+DESTDIR = qml/SituationsModel
 
 LIBS += -L$$OUT_PWD/../../xylitol/lib/Xylitol -lXylitol
 LIBS += -L$$OUT_PWD/../lib/SituationsModel -lSituationsModel

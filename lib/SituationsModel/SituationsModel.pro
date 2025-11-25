@@ -1,3 +1,5 @@
+QT += qml
+
 TEMPLATE = lib
 
 TARGET = $$qtLibraryTarget(SituationsModel)

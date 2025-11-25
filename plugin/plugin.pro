@@ -1,8 +1,6 @@
-uri = SituationsModel
-
 TEMPLATE = lib
 
-TARGET = $$qtLibraryTarget(SituationsModelPlugin)
+TARGET = $$qtLibraryTarget(SituationsModelplugin)
 
 QT += qml quick
 CONFIG += plugin
