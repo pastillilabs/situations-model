@@ -79,7 +79,7 @@ signals:
     void uidChanged(const QString& uid);
     void payloadChanged(const QJsonObject& payload);
     void settingsChanged(const QJsonObject& settings);
-    void readyStateChanged(Condition::ReadyState readyState);
+    void readyStateChanged(Model::Condition::ReadyState readyState);
     void runningChanged(bool running);
     void activeChanged(bool active);
 

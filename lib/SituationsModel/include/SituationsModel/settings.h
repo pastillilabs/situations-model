@@ -59,14 +59,14 @@ signals:
     void enabledChanged(bool enabled);
     void loggingChanged(bool logging);
     void notificationsChanged(bool notifications);
-    void themeChanged(Settings::Theme theme);
+    void themeChanged(Model::Settings::Theme theme);
     void localeChanged(const QString& locale);
 
     // Methods
     void reqSetEnabled(bool enabled);
     void reqSetLogging(bool logging);
     void reqSetNotifications(bool notifications);
-    void reqSetTheme(Settings::Theme theme);
+    void reqSetTheme(Model::Settings::Theme theme);
     void reqSetLocale(const QString& locale);
 
 private:

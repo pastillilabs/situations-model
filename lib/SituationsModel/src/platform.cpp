@@ -15,6 +15,17 @@ PackageList* Platform::packages() const {
     return mPackages;
 }
 
+Platform::CallState Platform::callState() const {
+    return mCallState;
+}
+
+void Platform::setCallState(CallState callState) {
+    if(callState != mCallState) {
+        mCallState = callState;
+        emit callStateChanged(callState);
+    }
+}
+
 const QString& Platform::locale() const {
     return mLocale;
 }

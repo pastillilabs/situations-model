@@ -88,9 +88,9 @@ signals:
     void uidChanged(const QString& uid);
     void payloadChanged(const QJsonObject& payload);
     void settingsChanged(const QJsonObject& settings);
-    void readyStateChanged(Action::ReadyState readyState);
-    void runningStateChanged(Action::RunningState runningState);
-    void activeStateChanged(Action::ActiveState activeState);
+    void readyStateChanged(Model::Action::ReadyState readyState);
+    void runningStateChanged(Model::Action::RunningState runningState);
+    void activeStateChanged(Model::Action::ActiveState activeState);
 
     // Methods
     void reqCommit(const QJsonObject& payload);
