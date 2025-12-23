@@ -1,0 +1,5 @@
+module SituationsModel
+linktarget SituationsModelplugin
+plugin SituationsModelplugin
+classname Plugin
+depends QtQuick 2.0

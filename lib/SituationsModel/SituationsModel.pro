@@ -24,6 +24,4 @@ HEADERS += $$files($$PWD/include/SituationsModel/*.h)
 HEADERS += $$files($$PWD/src/*.h)
 SOURCES += $$files($$PWD/src/*.cpp)
 
-DISTFILES = qmldir
-
 include(platform/platform.pri)

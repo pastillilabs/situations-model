@@ -1,3 +1,5 @@
+DISTFILES = $$PWD/../../qmldir
+
 CONFIG(debug, debug|release) {
     LIBS += -L$$OUT_PWD/../../../xylitol/lib/Xylitol/debug -lXylitold
 
