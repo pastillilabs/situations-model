@@ -20,9 +20,9 @@
 namespace Model {
 
 /**
- * @brief The Application class
+ * @brief The Root class
  */
-class MODEL_SHARED_EXPORT Application : public QObject {
+class MODEL_SHARED_EXPORT Root : public QObject {
     Q_OBJECT
     QML_ELEMENT
     QML_SINGLETON
@@ -35,11 +35,11 @@ class MODEL_SHARED_EXPORT Application : public QObject {
     Q_PROPERTY(int build READ build WRITE setBuild NOTIFY buildChanged)
 
 public:
-    static Application* instance();
+    static Root* instance();
 
 public:
-    explicit Application(QObject* parent = nullptr);
-    virtual ~Application();
+    explicit Root(QObject* parent = nullptr);
+    virtual ~Root();
 
     QJsonObject toJson(bool persistent) const;
     void fromJson(const QJsonObject& jsonObject, bool persistent, const SituationList::Initializer& situationInitializer);

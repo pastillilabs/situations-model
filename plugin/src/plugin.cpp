@@ -4,7 +4,6 @@
 #include <SituationsModel/actiongroup.h>
 #include <SituationsModel/actiongrouplist.h>
 #include <SituationsModel/actionproperties.h>
-#include <SituationsModel/application.h>
 #include <SituationsModel/condition.h>
 #include <SituationsModel/conditiongroup.h>
 #include <SituationsModel/conditiongrouplist.h>
@@ -15,6 +14,7 @@
 #include <SituationsModel/packagelist.h>
 #include <SituationsModel/platform.h>
 #include <SituationsModel/plugin.h>
+#include <SituationsModel/root.h>
 #include <SituationsModel/settings.h>
 #include <SituationsModel/situation.h>
 #include <SituationsModel/situationlist.h>
@@ -28,8 +28,8 @@ void Plugin::registerTypes([[maybe_unused]] const char* uri) {
 #if QT_VERSION >= QT_VERSION_CHECK(5, 9, 0)
     qmlRegisterModule(uri, 1, 0);
 #endif
-    qmlRegisterSingletonType<Model::Application>(uri, 1, 0, "Application", [](QQmlEngine* /*engine*/, QJSEngine* /*scriptEngine*/) -> QObject* {
-        return new Model::Application();
+    qmlRegisterSingletonType<Model::Root>(uri, 1, 0, "Root", [](QQmlEngine* /*engine*/, QJSEngine* /*scriptEngine*/) -> QObject* {
+        return new Model::Root();
     });
     qmlRegisterType<Model::Action>(uri, 1, 0, "Action");
     qmlRegisterType<Model::ActionGroup>(uri, 1, 0, "ActionGroup");

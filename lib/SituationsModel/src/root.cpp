@@ -1,4 +1,4 @@
-#include "SituationsModel/application.h"
+#include "SituationsModel/root.h"
 
 #include <Xylitol/templates.h>
 
@@ -6,28 +6,28 @@ namespace Model {
 
 namespace {
 
-Application* application = nullptr;
+Root* root = nullptr;
 
 } // namespace
 
-Application* Application::instance() {
-    return application;
+Root* Root::instance() {
+    return root;
 }
 
-Application::Application(QObject* parent)
+Root::Root(QObject* parent)
     : QObject(parent)
     , mFeatures(new FeatureList(this))
     , mPlatform(new Platform(this))
     , mSettings(new Settings(this))
     , mSituations(new SituationList(this)) {
-    application = this;
+    root = this;
 
     Xylitol::registerGadget<ActionProperties>();
     Xylitol::registerGadget<ConditionProperties>();
     Xylitol::registerGadget<VersionLimits>();
 }
 
-QJsonObject Application::toJson(bool persistent) const {
+QJsonObject Root::toJson(bool persistent) const {
     return QJsonObject{
         {QLatin1String("build"), mBuild},
         {QLatin1String("features"), mFeatures->toJson(persistent)},
@@ -36,7 +36,7 @@ QJsonObject Application::toJson(bool persistent) const {
     };
 }
 
-void Application::fromJson(const QJsonObject& jsonObject, bool persistent, const SituationList::Initializer& situationInitializer) {
+void Root::fromJson(const QJsonObject& jsonObject, bool persistent, const SituationList::Initializer& situationInitializer) {
     const QJsonValue build = jsonObject.value(QLatin1String("build"));
     const QJsonValue features = jsonObject.value(QLatin1String("features"));
     const QJsonValue situations = jsonObject.value(QLatin1String("situations"));
@@ -56,53 +56,53 @@ void Application::fromJson(const QJsonObject& jsonObject, bool persistent, const
     }
 }
 
-Application::~Application() {
-    application = nullptr;
+Root::~Root() {
+    root = nullptr;
 }
 
-FeatureList* Application::features() const {
+FeatureList* Root::features() const {
     return mFeatures;
 }
 
-Platform* Application::platform() const {
+Platform* Root::platform() const {
     return mPlatform;
 }
 
-Settings* Application::settings() const {
+Settings* Root::settings() const {
     return mSettings;
 }
 
-SituationList* Application::situations() const {
+SituationList* Root::situations() const {
     return mSituations;
 }
 
-bool Application::isImporting() const {
+bool Root::isImporting() const {
     return mImporting;
 }
 
-void Application::setImporting(bool importing) {
+void Root::setImporting(bool importing) {
     if(importing != mImporting) {
         mImporting = importing;
         emit importingChanged(importing);
     }
 }
 
-bool Application::isRestarting() const {
+bool Root::isRestarting() const {
     return mRestarting;
 }
 
-void Application::setRestarting(bool restarting) {
+void Root::setRestarting(bool restarting) {
     if(restarting != mRestarting) {
         mRestarting = restarting;
         emit restartingChanged(restarting);
     }
 }
 
-int Application::build() const {
+int Root::build() const {
     return mBuild;
 }
 
-void Application::setBuild(int build) {
+void Root::setBuild(int build) {
     if(build != mBuild) {
         mBuild = build;
         emit buildChanged(build);
