@@ -60,6 +60,7 @@ signals:
 
     // Methods
     void request(const QString& command);
+    void reqStartClient();
 
 private:
     ContactList* mContacts{nullptr};
