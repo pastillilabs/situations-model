@@ -82,6 +82,8 @@ void Plugin::setController(bool controller) {
     }
 }
 
+void Plugin::qmlRegisterTypes() const {}
+
 QJsonObject Plugin::toJson(bool persistent) const {
     if(persistent) {
         return {};

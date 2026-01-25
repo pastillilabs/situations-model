@@ -46,8 +46,11 @@ void Plugin::registerTypes([[maybe_unused]] const char* uri) {
     qmlRegisterType<Model::Settings>(uri, 1, 0, "Settings");
     qmlRegisterType<Model::Situation>(uri, 1, 0, "Situation");
     qmlRegisterType<Model::SituationList>(uri, 1, 0, "SituationList");
-    qmlRegisterUncreatableType<Model::ActionProperties>(uri, 1, 0, "actionProperties", QLatin1String("Cannot create ActionProperties instance."));
-    qmlRegisterUncreatableType<Model::ConditionProperties>(uri, 1, 0, "conditionProperties", QLatin1String("Cannot create ConditionProperties instance."));
-    qmlRegisterUncreatableType<Model::VersionLimits>(uri, 1, 0, "versionLimits", QLatin1String("Cannot create VersionLimits instance."));
+    qmlRegisterUncreatableType<Model::ActionProperties>(uri, 1, 0, "ActionProperties", QLatin1String("Cannot create ActionProperties instance."));
+    qmlRegisterUncreatableType<Model::ConditionProperties>(uri, 1, 0, "ConditionProperties", QLatin1String("Cannot create ConditionProperties instance."));
+    qmlRegisterUncreatableType<Model::VersionLimits>(uri, 1, 0, "VersionLimits", QLatin1String("Cannot create VersionLimits instance."));
+
+    qRegisterMetaType<Model::ActionProperties>();
+    qRegisterMetaType<Model::ConditionProperties>();
 #endif
 }
