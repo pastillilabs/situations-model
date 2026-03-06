@@ -25,6 +25,7 @@ class MODEL_SHARED_EXPORT Platform : public QObject {
     Q_PROPERTY(QString locale READ locale WRITE setLocale NOTIFY localeChanged)
     Q_PROPERTY(QString suPath READ suPath WRITE setSuPath NOTIFY suPathChanged)
     Q_PROPERTY(int version READ version WRITE setVersion NOTIFY versionChanged)
+    Q_PROPERTY(bool root READ isRoot WRITE setRoot NOTIFY rootChanged)
 
 public:
     enum class CallState {
@@ -52,11 +53,15 @@ public:
     int version() const;
     void setVersion(int version);
 
+    bool isRoot() const;
+    void setRoot(bool root);
+
 signals:
     void callStateChanged(Model::Platform::CallState callState);
     void localeChanged(const QString& locale);
     void suPathChanged(const QString& suPath);
     void versionChanged(int version);
+    void rootChanged(bool root);
 
     // Methods
     void request(const QString& command);
@@ -70,6 +75,7 @@ private:
     QString mLocale;
     QString mSuPath;
     int mVersion{0};
+    bool mRoot{false};
 };
 
 } // namespace Model

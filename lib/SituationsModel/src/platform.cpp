@@ -59,4 +59,15 @@ void Platform::setVersion(int version) {
     }
 }
 
+bool Platform::isRoot() const {
+    return mRoot;
+}
+
+void Platform::setRoot(bool root) {
+    if(root != mRoot) {
+        mRoot = root;
+        emit rootChanged(root);
+    }
+}
+
 } // namespace Model
