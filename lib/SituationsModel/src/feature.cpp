@@ -23,7 +23,7 @@ Feature::Feature(QObject* parent)
 
         const QString name = this->name();
 
-        QPluginLoader* pluginLoader{nullptr};
+        QPluginLoader* pluginLoader = nullptr;
         if(!sPluginPath.isEmpty()) {
 #if QT_VERSION >= QT_VERSION_CHECK(6, 2, 0)
             if(!name.isEmpty() && TypeFlags::fromInt(typeFlags()).testFlag(TypeFlagPlugin)) {
@@ -47,10 +47,29 @@ Feature::Feature(QObject* parent)
         setPluginLoader(pluginLoader);
     };
 
+    const auto resetPlugin = [this] {
+        delete mPlugin;
+        mPlugin = nullptr;
+
+        Plugin* plugin = nullptr;
+        if(mPluginLoader) {
+            plugin = qobject_cast<Plugin*>(mPluginLoader->instance());
+            if(plugin) {
+                mPlugin = plugin;
+            }
+            else {
+                qCWarning(category) << "Failed to instantiate plugin" << mPluginLoader->fileName();
+                qCWarning(category) << "Error:" << mPluginLoader->errorString();
+            }
+        }
+    };
+
     connect(this, &Feature::nameChanged,
             this, resetPluginLoader);
     connect(this, &Feature::typeFlagsChanged,
             this, resetPluginLoader);
+    connect(this, &Feature::pluginLoaderChanged,
+            this, resetPlugin);
 }
 
 Feature::~Feature() {
@@ -125,6 +144,10 @@ void Feature::fromJson(const QJsonObject& jsonObject, bool persistent) {
             mPlugin->fromJson(plugin.toObject(), persistent);
         }
     }
+}
+
+Plugin* Feature::plugin() const {
+    return mPlugin;
 }
 
 const QString& Feature::name() const {
@@ -258,17 +281,6 @@ void Feature::setInstalled(bool installed) {
     }
 }
 
-Plugin* Feature::plugin() const {
-    return mPlugin;
-}
-
-void Feature::setPlugin(Plugin* plugin) {
-    if(plugin != mPlugin) {
-        mPlugin = plugin;
-        emit pluginChanged(plugin);
-    }
-}
-
 QPluginLoader* Feature::pluginLoader() const {
     return mPluginLoader;
 }
@@ -278,22 +290,6 @@ void Feature::setPluginLoader(QPluginLoader* pluginLoader) {
         mPluginLoader = pluginLoader;
         emit pluginLoaderChanged(pluginLoader);
     }
-}
-
-Plugin* Feature::createPlugin() {
-    Plugin* plugin = nullptr;
-    if(!mPlugin && mPluginLoader) {
-        plugin = qobject_cast<Plugin*>(mPluginLoader->instance());
-        if(plugin) {
-            setPlugin(plugin);
-        }
-        else {
-            qCWarning(category) << "Failed to instantiate plugin" << mPluginLoader->fileName();
-            qCWarning(category) << "Error:" << mPluginLoader->errorString();
-        }
-    }
-
-    return plugin;
 }
 
 bool Feature::isAvailableAction(int platformVersion, bool rooted) const {
@@ -308,34 +304,6 @@ bool Feature::isAvailableCondition(int platformVersion, bool rooted) const {
     const bool rootCondition = (platformVersion >= mConditionLimits.rootMin() && platformVersion <= mConditionLimits.rootMax());
 
     return (normalCondition || (rooted && rootCondition));
-}
-
-QVariant Feature::xylitolFromVariant(const QMetaProperty& metaProperty, const QVariant& variant) {
-    QVariant value;
-
-    if(std::strcmp(metaProperty.name(), "plugin") == 0) {
-        Plugin* plugin = nullptr;
-
-        if(!variant.isNull() && mPluginLoader) {
-            plugin = qobject_cast<Plugin*>(mPluginLoader->instance());
-            if(plugin) {
-                Xylitol::fromVariant(*plugin, variant);
-                value = QVariant::fromValue(plugin);
-            }
-            else {
-                qCWarning(category) << "Failed to instantiate plugin" << mPluginLoader->fileName();
-                qCWarning(category) << "Error:" << mPluginLoader->errorString();
-            }
-        }
-    }
-
-    return value;
-}
-
-void Feature::xylitolWrite(const QMetaProperty& metaProperty, const QVariant& value) {
-    if(std::strcmp(metaProperty.name(), "plugin") == 0) {
-        setPlugin(value.value<Plugin*>());
-    }
 }
 
 } // namespace Model

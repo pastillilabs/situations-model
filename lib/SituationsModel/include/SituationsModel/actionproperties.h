@@ -24,6 +24,7 @@ class MODEL_SHARED_EXPORT ActionProperties {
     Q_PROPERTY(bool callBlocker READ isCallBlocker WRITE setCallBlocker)
     Q_PROPERTY(bool enabler READ isEnabler WRITE setEnabler)
     Q_PROPERTY(bool sequenceable READ isSequenceable WRITE setSequenceable)
+    Q_PROPERTY(bool stateful READ isStateful WRITE setStateful)
     Q_PROPERTY(int delay READ delay WRITE setDelay)
     Q_PROPERTY(int maxCount READ maxCount WRITE setMaxCount)
     Q_PROPERTY(int priority READ priority WRITE setPriority)
@@ -51,6 +52,9 @@ public:
     bool isSequenceable() const;
     void setSequenceable(bool sequenceable);
 
+    bool isStateful() const;
+    void setStateful(bool stateful);
+
     int delay() const;
     void setDelay(int delay);
 
@@ -66,6 +70,7 @@ private:
     bool mCallBlocker{false};
     bool mEnabler{false};
     bool mSequenceable{false};
+    bool mStateful{false};
     int mDelay{0};
     int mMaxCount{1};
     int mPriority{0};

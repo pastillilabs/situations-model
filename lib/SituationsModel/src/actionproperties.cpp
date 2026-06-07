@@ -58,6 +58,14 @@ void ActionProperties::setSequenceable(bool sequenceable) {
     mSequenceable = sequenceable;
 }
 
+bool ActionProperties::isStateful() const {
+    return mStateful;
+}
+
+void ActionProperties::setStateful(bool stateful) {
+    mStateful = stateful;
+}
+
 int ActionProperties::delay() const {
     return mDelay;
 }
