@@ -7,6 +7,7 @@
 #include <SituationsModel/platform.h>
 #include <SituationsModel/settings.h>
 #include <SituationsModel/situationlist.h>
+#include <SituationsModel/startup.h>
 
 #include <QJsonObject>
 #include <QObject>
@@ -30,6 +31,7 @@ class MODEL_SHARED_EXPORT Root : public QObject {
     Q_PROPERTY(Platform* platform READ platform CONSTANT)
     Q_PROPERTY(Settings* settings READ settings CONSTANT)
     Q_PROPERTY(SituationList* situations READ situations CONSTANT)
+    Q_PROPERTY(Startup* startup READ startup CONSTANT)
     Q_PROPERTY(bool importing READ isImporting WRITE setImporting NOTIFY importingChanged)
     Q_PROPERTY(bool restarting READ isRestarting WRITE setRestarting NOTIFY restartingChanged)
     Q_PROPERTY(int build READ build WRITE setBuild NOTIFY buildChanged)
@@ -48,6 +50,7 @@ public:
     Platform* platform() const;
     Settings* settings() const;
     SituationList* situations() const;
+    Startup* startup() const;
 
     bool isImporting() const;
     void setImporting(bool importing);
@@ -75,6 +78,7 @@ private:
     Platform* mPlatform{nullptr};
     Settings* mSettings{nullptr};
     SituationList* mSituations{nullptr};
+    Startup* mStartup{nullptr};
 
     bool mImporting{false};
     bool mRestarting{false};

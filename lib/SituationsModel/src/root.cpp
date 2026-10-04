@@ -19,7 +19,8 @@ Root::Root(QObject* parent)
     , mFeatures(new FeatureList(this))
     , mPlatform(new Platform(this))
     , mSettings(new Settings(this))
-    , mSituations(new SituationList(this)) {
+    , mSituations(new SituationList(this))
+    , mStartup(new Startup(this)) {
     root = this;
 
     Xylitol::registerGadget<ActionProperties>();
@@ -31,16 +32,18 @@ QJsonObject Root::toJson(bool persistent) const {
     return QJsonObject{
         {QLatin1String("build"), mBuild},
         {QLatin1String("features"), mFeatures->toJson(persistent)},
+        {QLatin1String("settings"), mSettings->toJson(persistent)},
         {QLatin1String("situations"), mSituations->toJson(persistent)},
-        {QLatin1String("settings"), mSettings->toJson(persistent)}
+        {QLatin1String("startup"), mStartup->toJson(persistent)}
     };
 }
 
 void Root::fromJson(const QJsonObject& jsonObject, bool persistent, const SituationList::Initializer& situationInitializer) {
     const QJsonValue build = jsonObject.value(QLatin1String("build"));
     const QJsonValue features = jsonObject.value(QLatin1String("features"));
-    const QJsonValue situations = jsonObject.value(QLatin1String("situations"));
     const QJsonValue settings = jsonObject.value(QLatin1String("settings"));
+    const QJsonValue situations = jsonObject.value(QLatin1String("situations"));
+    const QJsonValue startup = jsonObject.value(QLatin1String("startup"));
 
     if(!build.isUndefined()) {
         setBuild(build.toInt());
@@ -48,11 +51,14 @@ void Root::fromJson(const QJsonObject& jsonObject, bool persistent, const Situat
     if(!features.isUndefined()) {
         mFeatures->fromJson(features.toObject(), persistent);
     }
+    if(!settings.isUndefined()) {
+        mSettings->fromJson(settings.toObject(), persistent);
+    }
     if(!situations.isUndefined()) {
         mSituations->fromJson(situations.toObject(), persistent, situationInitializer);
     }
-    if(!settings.isUndefined()) {
-        mSettings->fromJson(settings.toObject(), persistent);
+    if(!startup.isUndefined()) {
+        mStartup->fromJson(startup.toObject(), persistent);
     }
 }
 
@@ -74,6 +80,10 @@ Settings* Root::settings() const {
 
 SituationList* Root::situations() const {
     return mSituations;
+}
+
+Startup* Root::startup() const {
+    return mStartup;
 }
 
 bool Root::isImporting() const {

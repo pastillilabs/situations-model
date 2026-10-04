@@ -50,6 +50,14 @@ void ActionProperties::setEnabler(bool enabler) {
     mEnabler = enabler;
 }
 
+bool ActionProperties::isExecutable() const {
+    return mExecutable;
+}
+
+void ActionProperties::setExecutable(bool executable) {
+    mExecutable = executable;
+}
+
 bool ActionProperties::isSequenceable() const {
     return mSequenceable;
 }

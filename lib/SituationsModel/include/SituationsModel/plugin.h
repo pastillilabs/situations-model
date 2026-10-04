@@ -87,6 +87,7 @@ public:
     virtual void stopping(const Action& action);
     virtual void stopped(const Action& action);
 
+    virtual void initialize(const QJsonObject& payload);
     virtual void execute(const QJsonObject& payload);
     virtual void evaluate(const QVector<Condition*>& conditions);
 

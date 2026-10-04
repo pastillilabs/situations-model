@@ -95,6 +95,7 @@ signals:
     // Methods
     void reqCommit(const QJsonObject& payload);
     void reqEdit(bool edit);
+    void reqInitialize();
 
 private:
     QString mUid;

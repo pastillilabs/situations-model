@@ -23,6 +23,7 @@ class MODEL_SHARED_EXPORT ActionProperties {
     Q_PROPERTY(QStringList extraPermissions READ extraPermissions WRITE setExtraPermissions)
     Q_PROPERTY(bool callBlocker READ isCallBlocker WRITE setCallBlocker)
     Q_PROPERTY(bool enabler READ isEnabler WRITE setEnabler)
+    Q_PROPERTY(bool executable READ isExecutable WRITE setExecutable)
     Q_PROPERTY(bool sequenceable READ isSequenceable WRITE setSequenceable)
     Q_PROPERTY(bool stateful READ isStateful WRITE setStateful)
     Q_PROPERTY(int delay READ delay WRITE setDelay)
@@ -49,6 +50,9 @@ public:
     bool isEnabler() const;
     void setEnabler(bool enabler);
 
+    bool isExecutable() const;
+    void setExecutable(bool executable);
+
     bool isSequenceable() const;
     void setSequenceable(bool sequenceable);
 
@@ -69,6 +73,7 @@ private:
     QStringList mExtraPermissions;
     bool mCallBlocker{false};
     bool mEnabler{false};
+    bool mExecutable{false};
     bool mSequenceable{false};
     bool mStateful{false};
     int mDelay{0};

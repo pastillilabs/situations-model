@@ -121,6 +121,8 @@ void Plugin::stopping(const Action& /*action*/) {}
 
 void Plugin::stopped(const Action& /*action*/) {}
 
+void Plugin::initialize(const QJsonObject& /*payload*/) {}
+
 void Plugin::execute(const QJsonObject& /*payload*/) {}
 
 void Plugin::evaluate(const QVector<Condition*>& /*conditions*/) {}

@@ -32,7 +32,6 @@ public:
     };
     Q_ENUM(Theme)
 
-
 public:
     explicit Settings(QObject* parent = nullptr);
     virtual ~Settings() = default;
