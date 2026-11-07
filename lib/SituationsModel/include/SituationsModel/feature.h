@@ -26,8 +26,6 @@ namespace Model {
 class MODEL_SHARED_EXPORT Feature : public QObject {
     Q_OBJECT
     QML_ELEMENT
-    Q_PROPERTY(Plugin* plugin READ plugin CONSTANT)
-
     Q_PROPERTY(QString name READ name WRITE setName NOTIFY nameChanged)
     Q_PROPERTY(int typeFlags READ typeFlags WRITE setTypeFlags NOTIFY typeFlagsChanged)
     Q_PROPERTY(Model::VersionLimits actionLimits READ actionLimits WRITE setActionLimits NOTIFY actionLimitsChanged)
@@ -40,6 +38,7 @@ class MODEL_SHARED_EXPORT Feature : public QObject {
     Q_PROPERTY(QString signature READ signature WRITE setSignature NOTIFY signatureChanged)
     Q_PROPERTY(QDateTime removeDate READ removeDate WRITE setRemoveDate NOTIFY removeDateChanged)
     Q_PROPERTY(bool installed READ isInstalled WRITE setInstalled NOTIFY installedChanged)
+    Q_PROPERTY(Plugin* plugin READ plugin NOTIFY pluginChanged)
 
     Q_PROPERTY(QPluginLoader* pluginLoader READ pluginLoader NOTIFY pluginLoaderChanged STORED false)
 
@@ -72,8 +71,6 @@ public:
 
     QJsonObject toJson(bool persistent) const;
     void fromJson(const QJsonObject& jsonObject, bool persistent);
-
-    Plugin* plugin() const;
 
     const QString& name() const;
     void setName(const QString& name);
@@ -111,11 +108,19 @@ public:
     bool isInstalled() const;
     void setInstalled(bool installed);
 
+    Plugin* plugin() const;
+    void setPlugin(Plugin* plugin);
+
     QPluginLoader* pluginLoader() const;
     void setPluginLoader(QPluginLoader* pluginLoader);
 
+    Plugin* createPlugin();
+
     Q_INVOKABLE bool isAvailableAction(int platformVersion, bool rooted) const;
     Q_INVOKABLE bool isAvailableCondition(int platformVersion, bool rooted) const;
+
+    Q_INVOKABLE QVariant xylitolFromVariant(const QMetaProperty& metaProperty, const QVariant& variant);
+    Q_INVOKABLE void xylitolWrite(const QMetaProperty& metaProperty, const QVariant& value);
 
 signals:
     void nameChanged(const QString& name);
@@ -130,6 +135,7 @@ signals:
     void signatureChanged(const QString& signature);
     void removeDateChanged(const QDateTime& removeDate);
     void installedChanged(bool installed);
+    void pluginChanged(Model::Plugin* plugin);
 
     void pluginLoaderChanged(QPluginLoader* pluginLoader);
 
@@ -138,8 +144,6 @@ signals:
     void reqUninstall();
 
 private:
-    Plugin* mPlugin{nullptr};
-
     QString mName;
     int mTypeFlags{TypeFlag::TypeFlagNone};
     VersionLimits mActionLimits;
@@ -152,6 +156,7 @@ private:
     QString mSignature;
     QDateTime mRemoveDate;
     bool mInstalled{false};
+    Plugin* mPlugin{nullptr};
 
     QPluginLoader* mPluginLoader{nullptr};
 };
