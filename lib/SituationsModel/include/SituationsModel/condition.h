@@ -2,6 +2,7 @@
 
 #include <SituationsModel/model_global.h>
 
+#include <QDateTime>
 #include <QJsonObject>
 #include <QObject>
 #include <QString>
@@ -23,7 +24,7 @@ class MODEL_SHARED_EXPORT Condition : public QObject {
     Q_PROPERTY(QJsonObject payload READ payload WRITE setPayload NOTIFY payloadChanged)
     Q_PROPERTY(QJsonObject settings READ settings WRITE setSettings NOTIFY settingsChanged)
     Q_PROPERTY(ReadyState readyState READ readyState WRITE setReadyState NOTIFY readyStateChanged)
-    Q_PROPERTY(bool running READ isRunning WRITE setRunning NOTIFY runningChanged)
+    Q_PROPERTY(QDateTime running READ running WRITE setRunning NOTIFY runningChanged)
     Q_PROPERTY(bool active READ isActive WRITE setActive NOTIFY activeChanged)
 
 public:
@@ -69,8 +70,8 @@ public:
     ReadyState readyState() const;
     void setReadyState(ReadyState readyState);
 
-    bool isRunning() const;
-    void setRunning(bool running);
+    QDateTime running() const;
+    void setRunning(const QDateTime& running);
 
     bool isActive() const;
     void setActive(bool active);
@@ -80,19 +81,20 @@ signals:
     void payloadChanged(const QJsonObject& payload);
     void settingsChanged(const QJsonObject& settings);
     void readyStateChanged(Model::Condition::ReadyState readyState);
-    void runningChanged(bool running);
+    void runningChanged(QDateTime running);
     void activeChanged(bool active);
 
     // Methods
     void reqCommit(const QJsonObject& payload);
     void reqEdit(bool edit);
+    void reqEvaluate();
 
 private:
     QString mUid;
     QJsonObject mPayload;
     QJsonObject mSettings;
     ReadyState mReadyState{ReadyState::ReadyStateReady};
-    bool mRunning{false};
+    QDateTime mRunning;
     bool mActive{false};
 };
 

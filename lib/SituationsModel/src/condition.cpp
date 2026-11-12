@@ -10,6 +10,7 @@ QJsonObject Condition::toJson(bool persistent) const {
         return {
             {QLatin1String("uid"), mUid},
             {QLatin1String("payload"), mPayload},
+            {QLatin1String("running"), mRunning.toString(Qt::ISODate)},
             {QLatin1String("settings"), mSettings}
         };
     }
@@ -22,6 +23,7 @@ void Condition::fromJson(const QJsonObject& jsonObject, bool persistent) {
     if(persistent) {
         const QJsonValue uid = jsonObject.value(QLatin1String("uid"));
         const QJsonValue payload = jsonObject.value(QLatin1String("payload"));
+        const QJsonValue running = jsonObject.value(QLatin1String("running"));
         const QJsonValue settings = jsonObject.value(QLatin1String("settings"));
 
         if(!uid.isUndefined()) {
@@ -29,6 +31,9 @@ void Condition::fromJson(const QJsonObject& jsonObject, bool persistent) {
         }
         if(!payload.isUndefined()) {
             setPayload(payload.toObject());
+        }
+        if(!running.isUndefined()) {
+            setRunning(QDateTime::fromString(running.toString(), Qt::ISODate));
         }
         if(!settings.isUndefined()) {
             setSettings(settings.toObject());
@@ -86,11 +91,11 @@ void Condition::setReadyState(ReadyState readyState) {
     }
 }
 
-bool Condition::isRunning() const {
+QDateTime Condition::running() const {
     return mRunning;
 }
 
-void Condition::setRunning(bool running) {
+void Condition::setRunning(const QDateTime& running) {
     if(running != mRunning) {
         mRunning = running;
         emit runningChanged(running);
