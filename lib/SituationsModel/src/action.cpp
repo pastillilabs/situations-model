@@ -10,6 +10,8 @@ QJsonObject Action::toJson(bool persistent) const {
         return {
             {QLatin1String("uid"), mUid},
             {QLatin1String("payload"), mPayload},
+            {QLatin1String("runningState"), static_cast<int>(mRunningState)},
+            {QLatin1String("activeState"), static_cast<int>(mActiveState)},
             {QLatin1String("settings"), mSettings}
         };
     }
@@ -22,6 +24,8 @@ void Action::fromJson(const QJsonObject& jsonObject, bool persistent) {
     if(persistent) {
         const QJsonValue uid = jsonObject.value(QLatin1String("uid"));
         const QJsonValue payload = jsonObject.value(QLatin1String("payload"));
+        const QJsonValue runningState = jsonObject.value(QLatin1String("runningState"));
+        const QJsonValue activeState = jsonObject.value(QLatin1String("ativeState"));
         const QJsonValue settings = jsonObject.value(QLatin1String("settings"));
 
         if(!uid.isUndefined()) {
@@ -29,6 +33,12 @@ void Action::fromJson(const QJsonObject& jsonObject, bool persistent) {
         }
         if(!payload.isUndefined()) {
             setPayload(payload.toObject());
+        }
+        if(!runningState.isUndefined()) {
+            setRunningState(static_cast<RunningState>(runningState.toInt()));
+        }
+        if(!activeState.isUndefined()) {
+            setActiveState(static_cast<ActiveState>(activeState.toInt()));
         }
         if(!settings.isUndefined()) {
             setSettings(settings.toObject());
